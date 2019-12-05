@@ -110,10 +110,12 @@ class Getir extends React.Component {
                 {nameTag}
                 {this.renderItems()}
                 <Switch>
-                    <Route path="/:title" component={Category} />
+                    <Route path="/:title" component={Category} /> 
                 </Switch>
             </Auxx>
         );
     }
 }
 export default Getir;
+
+//Calismiyor
