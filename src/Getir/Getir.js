@@ -118,4 +118,3 @@ class Getir extends React.Component {
 }
 export default Getir;
 
-//Calismiyor
