@@ -1,1 +1,0 @@
-# gotur_front

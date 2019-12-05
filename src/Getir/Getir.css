@@ -1,0 +1,69 @@
+.Getir {
+    background: rgba(93, 62, 188, 0.45);
+    height: 250px;
+}
+.Search {
+    align-items: center;
+    justify-content: center;
+    margin-left: 550px;
+    margin-top: 150px;
+    width: 30%;
+}
+.Logo{
+    float: right;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+body{
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.searchIcon{
+    width: 30px;
+    display: block;
+    padding-left: 3px;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #5D3DBD;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #5D3DBD;
+}
+
+.searchTerm:focus{
+  color: #5D3DBD;
+}
+
+.searchButton {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid #5D3DBD;
+  background: #5D3DBD;
+  text-align: center;
+  color: #5D3DBD;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
