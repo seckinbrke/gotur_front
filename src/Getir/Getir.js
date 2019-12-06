@@ -88,7 +88,7 @@ class Getir extends React.Component {
         }
     }
     render() {
-        let nameTag = this.state.query.length === 0 ? <p>Kategoriler</p> : <p>"{this.state.query}" için bulunan ürünler...</p> //Arda bunu sekil yap
+        let nameTag = this.state.query.length === 0 ? <p className="categoryText">Kategoriler</p> : <p>"{this.state.query}" için bulunan ürünler...</p> //Arda bunu sekil yap
         return (
             <Auxx>
                 <div className="Getir">

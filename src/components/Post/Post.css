@@ -11,6 +11,11 @@
     float: left;
     height: 220px;
 }
+@media screen and (max-width: 420px) {
+    .Post {
+      width: 45.1%;
+    }
+  }
 
 .Post:hover,
 .Post:active {
