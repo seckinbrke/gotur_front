@@ -7,8 +7,6 @@ import Post from '../components/Post/Post';
 import axios from 'axios';
 import Spinner from '../components/Spinner/Spinner';
 import CategoryItem from '../components/Category/CategoryItem/CategoryItem';
-import Category from '../components/Category/Category'
-import { Route, Switch } from 'react-router-dom';
 
 
 
@@ -67,7 +65,7 @@ class Getir extends React.Component {
             )
         }
         else {
-            if (this.state.query.length === 0) {
+            if (this.state.query === "") {
                 return this.state.categoryData.map(data => {
                     return <CategoryItem key={data._id}
                         title={data.mainType}
@@ -109,9 +107,9 @@ class Getir extends React.Component {
                 </div>
                 {nameTag}
                 {this.renderItems()}
-                <Switch>
+                {/* <Switch>
                     <Route path="/:title" component={Category} /> 
-                </Switch>
+                </Switch> */}
             </Auxx>
         );
     }

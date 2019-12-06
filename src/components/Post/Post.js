@@ -1,6 +1,4 @@
 import React from 'react';
-
-
 import './Post.css';
 
 const post = (props) => (
@@ -16,10 +14,3 @@ const post = (props) => (
 );
 
 export default post;
-
-// Urun cagirma
-{/* <Post key={data._id}
-                    title={data.name}
-                    link={data.productPhoto}
-                    price={data.price}
-                /> */}

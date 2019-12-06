@@ -1,19 +1,18 @@
 .Post {
-    width: 200px;
+    width: 160px;
+    height: 220px;
     text-align: center;
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
     border-radius: 10px;
     box-shadow: 0 2px 3px #ccc;
     margin: 10px;
-    box-sizing: border-box;
     cursor: pointer;
     float: left;
-    height: 220px;
 }
 @media screen and (max-width: 420px) {
     .Post {
-      width: 45.1%;
+      width: 43%;
     }
   }
 
