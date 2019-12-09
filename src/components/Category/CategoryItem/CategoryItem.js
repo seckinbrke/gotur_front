@@ -8,7 +8,7 @@ const CategoryItem = (props) => (
    // <Link to={'/' + props.title}>
         <article className="PostCatagory">
             <div className="TitleCatagory" >
-                <h3>{props.title}</h3>
+                <h3 style={{fontSize:15}}>{props.title}</h3>
             </div>
             <div className="InfoCatagory">
                 <img className="ImagesCatagory" src={props.link} alt="" />

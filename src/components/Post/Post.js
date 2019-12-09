@@ -8,7 +8,7 @@ const post = (props) => (
         </div>
         <div className="Info">
             <img className="Images" src={props.link} alt="" />
-            <h3>{props.price} ₺</h3>
+            <h3 className="Price">{props.price} ₺</h3>
         </div>
     </article>
 );

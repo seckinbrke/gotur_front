@@ -7,7 +7,9 @@ import Post from '../components/Post/Post';
 import axios from 'axios';
 import Spinner from '../components/Spinner/Spinner';
 import CategoryItem from '../components/Category/CategoryItem/CategoryItem';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+import image from '../img/carousel1.png'
 
 
 
@@ -23,7 +25,7 @@ class Getir extends React.Component {
         this.getCategory();
     }
     getItem = async () => {
-        if (this.state.query.trim() !== "") {
+        if (this.state.query.trim().length > 0) {
             this.setState({ isVisible: true })
             let body = { name: this.state.query }
             let REQUEST_URL = 'http://goturapp.herokuapp.com/product/get';
@@ -53,12 +55,9 @@ class Getir extends React.Component {
             })
     }
     handleChange(event) {
-        this.setState({ query: event.target.value }, () => {  //Callback yapiliyor once this.setState renderlaniyor sonra getItem()
-            this.getItem();
-        });
+        this.setState({ query: event.target.value });
     }
     renderItems = () => {
-
         if (this.state.isVisible) {
             return (
                 <Spinner />
@@ -88,31 +87,15 @@ class Getir extends React.Component {
     render() {
         let nameTag = this.state.query.length === 0 ? <p className="categoryText">Kategoriler</p> : <p>"{this.state.query}" için bulunan ürünler...</p> //Arda bunu sekil yap
         return (
-            <Auxx>
-                <div className="Getir">
-                    <img className="Logo" src={logo} />
-                    <div className="wrap">
-                        <div className="search">
-                            <input
-                                value={this.state.query}
-                                onChange={(query) => this.handleChange(query)}
-                                type="text"
-                                className="searchTerm"
-                                placeholder="Hangi ürünü aramıştınız?" />
-                            <button onClick={() => this.getItem()} type="submit" className="searchButton">
-                                <img className="searchIcon" src={searchIcon} />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                {nameTag}
-                {this.renderItems()}
-                {/* <Switch>
-                    <Route path="/:title" component={Category} /> 
-                </Switch> */}
-            </Auxx>
+            <div>
+                <Auxx>
+                    {this.renderItems()}
+                </Auxx>
+            </div>
+
+
         );
     }
 }
 export default Getir;
-//Denemedafaasdf
+                            //Denemedafaasdf

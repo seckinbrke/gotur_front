@@ -9,7 +9,7 @@
     cursor: pointer;
     float: left;
     height: 160px;
-    width: 160px;
+    width: 140px;
 }
 
 .PostCatagory:hover,
@@ -22,7 +22,7 @@
 }
 .TitleCatagory{
     color: #5D3DBD;
-    font-size: 13px;
+    font-size: 3px;
     margin:10px
 }
 
