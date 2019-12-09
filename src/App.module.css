@@ -1,6 +1,4 @@
 :global .App {
   background-image: url(./img/getirbackground.jpg);
-  flex: 1;
-  resize: 'cover';
-
+  
 }

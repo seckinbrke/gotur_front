@@ -9,6 +9,8 @@
     margin: 10px;
     cursor: pointer;
     float: left;
+    flex-direction: column;
+    display: flex;
 }
 @media screen and (max-width: 420px) {
     .Post {
@@ -32,7 +34,16 @@
 }
 .Title{
     color: #5D3DBD;
-    font-size: 13px;
-    margin:10px
+    font-size: 17px;
+    font-weight: bold;
+    margin: 10px;
+    text-align: center;
 }
+.Price {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px;
+    text-align: center;
+}
+
 

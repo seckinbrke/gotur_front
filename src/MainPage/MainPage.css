@@ -1,4 +1,4 @@
-.Getir {
+.MainPage {
     height: 220px;
 }
 .Search {
@@ -45,7 +45,7 @@ body{
   border: 3px solid #5D3DBD;
   border-right: none;
   padding: 5px;
-  height: 20px;
+  height: 36px;
   border-radius: 5px 0 0 5px;
   outline: none;
   color: #5D3DBD;
