@@ -1,23 +1,27 @@
 import React from 'react';
-
-
-
 import './CategoryItem.css';
 
-const CategoryItem = (props) => (
-   // <Link to={'/' + props.title}>
-        <article className="PostCatagory">
-            <div className="TitleCatagory" >
-                <h3 style={{fontSize:15}}>{props.title}</h3>
-            </div>
-            <div className="InfoCatagory">
-                <img className="ImagesCatagory" src={props.link} alt="" />
-            </div>
-        </article>
-   // </Link>
-);
+class CategoryItem extends React.Component {
 
+    render() {
+        const { onClick, title, link } = this.props;
+        return (
+            <div onClick={onClick}>
+                <article className="PostCatagory">
+                    <div className="TitleCatagory" >
+                        <h3 style={{ fontSize: 15 }}>{title}</h3>
+                    </div>
+                    <div className="InfoCatagory">
+                        <img className="ImagesCatagory" src={link} alt="" />
+                    </div>
+                </article>
+            </div>
+        );
+    }
+}
 export default CategoryItem;
+                            //Denemedafaasdf
+
 
 // getCatItem = async () => {
 //     this.setState({ isVisible: true })

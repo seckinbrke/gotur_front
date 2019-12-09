@@ -1,7 +1,7 @@
 import React from 'react';
 import './Post.css';
 
-const post = (props) => (
+const Post = (props) => (
     <article className="Post">
         <div className="Title" >
             <h3>{props.title}</h3>
@@ -13,4 +13,4 @@ const post = (props) => (
     </article>
 );
 
-export default post;
+export default Post;
