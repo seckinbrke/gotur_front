@@ -117,4 +117,4 @@ class Getir extends React.Component {
     }
 }
 export default Getir;
-//Denemedafaasdf
+//Denemedafaasdf5
