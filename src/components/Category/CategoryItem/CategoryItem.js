@@ -1,21 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 
 
 import './CategoryItem.css';
 
 const CategoryItem = (props) => (
-    <Link to={'/' + props.title}>
-        <article className="Post">
-            <div className="Title" >
-                <h3>{props.title}</h3>
+   // <Link to={'/' + props.title}>
+        <article className="PostCatagory">
+            <div className="TitleCatagory" >
+                <h3 style={{fontSize:15}}>{props.title}</h3>
             </div>
-            <div className="Info">
-                <img className="Images" src={props.link} alt="" />
+            <div className="InfoCatagory">
+                <img className="ImagesCatagory" src={props.link} alt="" />
             </div>
         </article>
-    </Link>
+   // </Link>
 );
 
 export default CategoryItem;

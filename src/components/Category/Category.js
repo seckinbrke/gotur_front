@@ -5,7 +5,7 @@ class Category extends Component {
     state = {
         data: []
     }
-    getItem = async () => {
+    getFilteredItem = async () => {
         this.setState({ isVisible: true })
         let body = { mainType: this.props.title }
         let REQUEST_URL = 'http://goturapp.herokuapp.com/enroll/getCategoryItems ';
@@ -22,7 +22,7 @@ class Category extends Component {
     }
     render() {
         return (
-            <h4>S</h4>
+            <h4></h4>
         );
     }
 }

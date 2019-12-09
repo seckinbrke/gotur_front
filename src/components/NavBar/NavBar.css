@@ -1,0 +1,16 @@
+@import url(https://fonts.googleapis.com/css?family=Comfortaa);
+.brandText{
+  font-size: 100%;
+  color: #FFD10D;
+  font-family: Comfortaa;
+}
+.pages{
+    font-size: 80%;
+    color: #FFD10D;
+    font-family: Comfortaa;
+  }
+
+  .icon{
+   height: 50px;
+   width: 50px;
+  }

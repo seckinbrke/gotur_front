@@ -1,5 +1,4 @@
-.Post {
-    width: 200px;
+.PostCatagory {
     text-align: center;
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
@@ -9,19 +8,25 @@
     box-sizing: border-box;
     cursor: pointer;
     float: left;
-    height: 100;
+    height: 160px;
+    width: 140px;
 }
 
-.Post:hover,
-.Post:active {
+.PostCatagory:hover,
+.PostCatagory:active {
     background-color: #FFFFFF;
 }
 
-.Author {
+.AuthorCatagory {
     color: #5D3DBD;
 }
+.TitleCatagory{
+    color: #5D3DBD;
+    font-size: 3px;
+    margin:10px
+}
 
-.Images {
+.ImagesCatagory {
     width: 100px;
     height: 100px;
     border-radius: 5px;
