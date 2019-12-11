@@ -36,18 +36,33 @@ class CatagoryDetail extends React.Component {
             })
 
     }
+    getItems = async () => {
+        
+            this.setState({ isVisible: true })
+            let body = { name: this.state.query }
+            let REQUEST_URL = 'http://goturapp.herokuapp.com/product/get';
+            await axios.post(REQUEST_URL, body)
+                .then(response => response)
+                .then(responseData => {
+                    console.warn(responseData.data)
+                    this.setState({ data: responseData.data, isVisible: false })
+                })
+                .catch(error => {
+                    this.setState({ error: true });
+                })
+        
+    }
     handleChange (event) {
-        this.setState({ query: event.target.value }, () => {  //Callback yapiliyor once this.setState renderlaniyor sonra getItem()
+        this.setState({ query: event.target.value }, () => {  
             if (this.state.query.length === 0) {
                 this.setState({data: this.state.unfiltredItems})
             }
             else {
                 this.state.data.filter(item => {
-                    return item.name === this.state.query
-                }, () => {
-                    this.setState({data: this.state.data}, () => {
-                        console.log(this.state.data);
-                    })
+                    this.getItems();
+                    return item.name == this.state.query
+                       
+                    
                 })
             }   
         });
