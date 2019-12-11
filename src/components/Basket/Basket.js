@@ -13,11 +13,14 @@ class Basket extends React.Component {
         isVisible: true
     }
     render() {
-       
+
         return (
-           <div className="MainDiv"  >
-             <img className="Image" src={goturIcon} alt="" />
-           </div>
+            <div className="MainDiv" >
+                <div className="BoxDiv">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <img className="Image" src={goturIcon} alt="" />
+            </div>
         );
     }
 }

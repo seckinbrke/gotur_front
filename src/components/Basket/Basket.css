@@ -11,3 +11,8 @@
     height: 50px;
     width: 50px;
 }
+.BoxDiv{
+    padding: 15px;
+    background: #FFD10D;
+    border-radius: 100000px;
+}
