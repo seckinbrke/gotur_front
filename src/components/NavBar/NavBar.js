@@ -3,21 +3,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBar.css';
 import { Navbar, NavDropdown, Nav } from 'react-bootstrap';
 import icon from '../../img/gotur.png'
+import { history } from '../../App';
 
 export default Headers = () => {
     return (
         <Navbar collapseOnSelect expand="lg" className='navBar'>
             <Navbar.Brand href="#home">
-                <span className="brandText">götür</span>
+                <span onClick={()=> history.push({ pathname: "/"})} className="brandText" >götür</span>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="#pricing">
-                        <span className="pages">anasayfa</span>
-                    </Nav.Link>
-                    <Nav.Link href="#features">
-                        <span className="pages">kategoriler</span>
+                    <Nav.Link >
+                        <span onClick={()=> history.push({ pathname: "/"})} className="pages">anasayfa</span>
                     </Nav.Link>
                 </Nav>
                 <Nav>

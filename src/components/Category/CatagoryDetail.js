@@ -37,36 +37,28 @@ class CatagoryDetail extends React.Component {
 
     }
     getItems = async () => {
-        
-            this.setState({ isVisible: true })
-            let body = { name: this.state.query }
-            let REQUEST_URL = 'http://goturapp.herokuapp.com/product/get';
-            await axios.post(REQUEST_URL, body)
-                .then(response => response)
-                .then(responseData => {
-                    console.warn(responseData.data)
-                    this.setState({ data: responseData.data, isVisible: false })
-                })
-                .catch(error => {
-                    this.setState({ error: true });
-                })
-        
+
+        this.setState({ isVisible: true })
+        let body = { name: this.state.query, mainType: this.props.location.state.item.mainType }
+        let REQUEST_URL = 'http://goturapp.herokuapp.com/enroll/getFilteredItem';
+        await axios.post(REQUEST_URL, body)
+            .then(response => response)
+            .then(responseData => {
+                console.warn(responseData.data)
+                this.setState({ data: responseData.data, isVisible: false })
+            })
+            .catch(error => {
+                this.setState({ error: true });
+            })
+
     }
-    handleChange (event) {
-        this.setState({ query: event.target.value }, () => {  
-            if (this.state.query.length === 0) {
-                this.setState({data: this.state.unfiltredItems})
-            }
-            else {
-                this.state.data.filter(item => {
-                    this.getItems();
-                    return item.name == this.state.query
-                       
-                    
-                })
-            }   
+    handleChange = (event) => {
+        this.setState({
+            query: event.target.value,
+        },()=>{
+            if(this.state.query.length ===0 )
+            this.setState({data:this.state.unfiltredItems})
         });
-        
     }
 
     renderItems = () => {
@@ -85,7 +77,11 @@ class CatagoryDetail extends React.Component {
 
         }
     }
-
+    _handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            this.getItems()
+        }
+      }
     render() {
         let nameTag = this.state.query.length === 0 ? <p className="categoryText">Kategoriler</p> : <p>"{this.state.query}" için bulunan ürünler...</p> //Arda bunu sekil yap
         return (
@@ -98,8 +94,9 @@ class CatagoryDetail extends React.Component {
                                 onChange={(query) => this.handleChange(query)}
                                 type="text"
                                 className="searchTerm"
+                                onKeyDown={this._handleKeyDown}
                                 placeholder="Hangi ürünü aramıştınız?" />
-                            <button onClick={() => this.getItem()} type="submit" className="searchButton">
+                            <button onClick={() => this.getItems()} type="submit" className="searchButton">
                                 <img className="searchIcon" src={searchIcon} />
                             </button>
                         </div>
