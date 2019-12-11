@@ -5,17 +5,14 @@ import goturIcon from '../../img/gotur.png'
 
 class Basket extends React.Component {
     state = {
-        data: [],
-        unfiltredItems: [],
-        categoryItems: [],
-        query: "",
-        error: false,
-        isVisible: true
+        isVisible: false,
     }
     render() {
-
         return (
-            <div onClick={()=>{}} className="MainDiv" >
+            <div onClick={() => {
+                this.setState({ isVisible: !this.state.isVisible })
+                console.log(this.state.isVisible)
+            }} className="MainDiv" >
                 <div className="BoxDiv">
                     <i class="fas fa-shopping-cart"></i>
                 </div>
