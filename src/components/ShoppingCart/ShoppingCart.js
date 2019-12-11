@@ -1,21 +1,16 @@
 import React from 'react';
-import ProductDisplay from './ProductDisplay.js';
+import ProductDisplay from './ProductDisplay';
+import './ShoppingCart.css' 
 
-const shoppingCart = props => {
-    if (props.items.length === 0) {
+export default class ShoppingCart extends React.Component {
+    //Items state arrayi yapmamiz lazim buraya
+
+    render() {
         return (
-            <div className="EmptyCart">
-                Sepetinizde ürün bulunmamaktadır.
+            <div className="ShoppingCart">
+                <ProductDisplay shoppingItems={this.props.shoppingItems} checkout={this.props.checkout} />
             </div>
         )
-    } else {
-        return (
-            <div className="shoppingCart">
-                <ProductDisplay items={props.items} checkout={props.checkout} />
-            </div>
-        )
-
     }
 
 }
-export default shoppingCart;

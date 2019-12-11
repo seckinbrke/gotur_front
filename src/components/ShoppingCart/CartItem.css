@@ -1,0 +1,10 @@
+.CartItem {
+    height: 50px;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+}
+.CartName{
+    color: white;
+    font-size: 50px;
+}

@@ -6,7 +6,8 @@ import axios from 'axios';
 import Spinner from '../Spinner/Spinner';
 import searchIcon from '../../img/search.png';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
+import { connect } from 'react-redux';
+import { actions as shoppingItemsActions } from '../../duck/Redux';
 
 class CatagoryDetail extends React.Component {
     state = {
@@ -72,7 +73,8 @@ class CatagoryDetail extends React.Component {
                 return <Post key={data._id}
                     title={data.name}
                     link={data.productPhoto}
-                    price={data.price} />
+                    price={data.price}
+                    onClick={()=>{this.props.setShoppingItem([data])}} />
             })
 
         }
@@ -107,6 +109,12 @@ class CatagoryDetail extends React.Component {
         );
     }
 }
-export default CatagoryDetail;
+const mapStateToProps = ({ Redux: { shoppingItems } }) => ({
+    shoppingItems
+})
+const mapDispatchToProps = (dispatch) => ({
+    setShoppingItem: (shoppingItems) => dispatch(shoppingItemsActions.setShoppingItem(shoppingItems)),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(CatagoryDetail);
 
 
