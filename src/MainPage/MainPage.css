@@ -1,6 +1,7 @@
 .MainPage {
     height: 120px;
     background-image: url('./../img/getirbackground.jpg');
+    background-position-y: -57px;
 }
 
 .Search {
