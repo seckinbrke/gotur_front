@@ -1,5 +1,6 @@
 import React from 'react';
-import Auxx from '../../hoc/Auxx';
+import './Basket.css'
+import goturIcon from '../../img/gotur.png'
 
 
 class Basket extends React.Component {
@@ -12,10 +13,11 @@ class Basket extends React.Component {
         isVisible: true
     }
     render() {
-        let nameTag = this.state.query.length === 0 ? <p className="categoryText">Kategoriler</p> : <p>"{this.state.query}" için bulunan ürünler...</p> //Arda bunu sekil yap
+       
         return (
-            <Auxx>
-            </Auxx>
+           <div className="MainDiv"  >
+             <img className="Image" src={goturIcon} alt="" />
+           </div>
         );
     }
 }

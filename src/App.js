@@ -9,6 +9,7 @@ import {
 import Headers from './components/NavBar/NavBar'
 import CatagoryDetail from './components/Category/CatagoryDetail';
 import createHistory from 'history/createBrowserHistory';
+import Basket from './components/Basket/Basket';
 export const history = createHistory({ forceRefresh: true })
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
           <Route path="/" exact initial component={MainPage} />
           <Route path="/catagoryDetail" component={CatagoryDetail} />
         </Switch>
-
+        <Basket/>
       </div>
     </Router >
   );
