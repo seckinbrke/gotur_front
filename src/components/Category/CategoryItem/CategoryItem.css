@@ -1,16 +1,29 @@
 .PostCatagory {
+    width: 29.8%;
+    height: 220px;
     text-align: center;
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
     border-radius: 10px;
     box-shadow: 0 2px 3px #ccc;
-    margin: 10px;
-    box-sizing: border-box;
+    margin: 1.73%;
     cursor: pointer;
     float: left;
-    height: 160px;
-    width: 140px;
+    flex-direction: column;
+    display: flex;
 }
+@media screen and (max-width: 480px) {
+    .PostCatagory {
+      width: 45%;
+      margin: 2.50%;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .PostCatagory {
+      width: 45%;
+    }
+  }
+
 
 .PostCatagory:hover,
 .PostCatagory:active {
@@ -22,13 +35,13 @@
 }
 .TitleCatagory{
     color: #5D3DBD;
-    font-size: 3px;
+    font-size: 7px;
     margin:10px
 }
 
 .ImagesCatagory {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 5px;
 }
 

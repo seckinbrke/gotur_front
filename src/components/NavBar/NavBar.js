@@ -6,7 +6,7 @@ import icon from '../../img/gotur.png'
 
 export default Headers = () => {
     return (
-        <Navbar collapseOnSelect expand="lg">
+        <Navbar collapseOnSelect expand="lg" className='navBar'>
             <Navbar.Brand href="#home">
                 <span className="brandText">götür</span>
             </Navbar.Brand>

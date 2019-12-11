@@ -1,6 +1,8 @@
 .MainPage {
-    height: 220px;
+    height: 120px;
+    background-image: url('./../img/getirbackground.jpg');
 }
+
 .Search {
     align-items: center;
     justify-content: center;
@@ -71,8 +73,8 @@ body{
 /*Resize the wrap to see the search bar change!*/
 .wrap{
   width: 40%;
-  position: absolute;
-  top: 18%;
+  position: relative;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -80,8 +82,8 @@ body{
 @media screen and (max-width: 420px) {
   .wrap{
     width: 60%;
-    position: absolute;
-    top: 18%;
+    position: relative;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
