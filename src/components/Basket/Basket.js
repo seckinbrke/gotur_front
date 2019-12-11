@@ -15,7 +15,7 @@ class Basket extends React.Component {
     render() {
 
         return (
-            <div className="MainDiv" >
+            <div onClick={()=>{}} className="MainDiv" >
                 <div className="BoxDiv">
                     <i class="fas fa-shopping-cart"></i>
                 </div>

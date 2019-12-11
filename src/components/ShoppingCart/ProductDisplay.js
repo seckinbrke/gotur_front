@@ -1,16 +1,31 @@
 import React from 'react';
 import CartItem from './CartItem.js';
 
-class ProductDisplay extends Components {
+class ProductDisplay extends React.Components {
     //Items state arrayi yapmamiz lazim buraya
-    items = {
-        name:'Elma',
-        price:'7',
-        number:'1'
+    items = [
+        {
+            name: 'Elma',
+            price: '7',
+            number: '1'
+        }
+    ]
+    renderItems() {
+        this.items.map((item, index) => {
+            return (
+                <CartItem name={item.name} price={item.price} number={item.number} key={index} />
+            )
+        })
     }
-    cartList = this.items.map((name,index) => {
-        <CartItem name={name} price={price} number={number} key={index}/>
-    })
+
+
+    render() {
+        return (
+            <div>
+                {this.renderItems()}
+            </div>
+        )
+    }
 
 }
 export default ProductDisplay;
