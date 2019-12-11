@@ -1,0 +1,7 @@
+.ShoppingCart{
+    float: right;
+    width: 100px;
+    height: 200px;
+    background: seashell;
+    border-radius: 10px;
+}
