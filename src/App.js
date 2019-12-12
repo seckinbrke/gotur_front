@@ -2,7 +2,7 @@ import React from 'react';
 import './App.module.css';
 import createHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux'
-import store from "./duck/index.js";
+import store from "./duck";
 import Root from './Root';
 export const history = createHistory({ forceRefresh: true })
 

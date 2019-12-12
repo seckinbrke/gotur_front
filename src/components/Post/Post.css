@@ -45,5 +45,11 @@
     margin: 10px;
     text-align: center;
 }
+.PlusIconDiv{
+    display: flex;
+    justify-content: flex-end;
+    margin:5px;
+    right: 0;
+}
 
 

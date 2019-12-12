@@ -7,7 +7,7 @@ import Spinner from '../Spinner/Spinner';
 import searchIcon from '../../img/search.png';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { connect } from 'react-redux';
-import { actions as shoppingItemsActions } from '../../duck/Redux';
+import { actions as shoppingItemsActions } from '../../duck/reducers/Redux';
 
 class CatagoryDetail extends React.Component {
     state = {
@@ -56,10 +56,31 @@ class CatagoryDetail extends React.Component {
     handleChange = (event) => {
         this.setState({
             query: event.target.value,
-        },()=>{
-            if(this.state.query.length ===0 )
-            this.setState({data:this.state.unfiltredItems})
+        }, () => {
+            if (this.state.query.length === 0)
+                this.setState({ data: this.state.unfiltredItems })
         });
+    }
+    /*
+    store.subscribe(() => {
+    // persist your state
+    })
+    */
+    mergeItems = (item) => {
+        this.props.setTotalPrice(0);
+        let mergedItems = this.props.shoppingItems;
+        let mergedItemsStorage = JSON.parse(localStorage.getItem('shoppingItems'));
+        mergedItems.push(item)
+        mergedItemsStorage.push(item)
+        localStorage.setItem('shoppingItems', JSON.stringify(mergedItemsStorage));
+        this.props.setShoppingItem(mergedItems);
+        localStorage.setItem('shoppingItemCount', mergedItems.length);
+        this.props.setShoppingItemCount(mergedItems.length);
+        let total = 0;
+        mergedItems.map((item) => { return total += item.price })
+        console.log(total)
+        localStorage.setItem('totalPrice', total);
+        this.props.setTotalPrice(total);
     }
 
     renderItems = () => {
@@ -74,7 +95,7 @@ class CatagoryDetail extends React.Component {
                     title={data.name}
                     link={data.productPhoto}
                     price={data.price}
-                    onClick={()=>{this.props.setShoppingItem([data])}} />
+                    onClick={() => { this.mergeItems(data) }} />
             })
 
         }
@@ -83,7 +104,7 @@ class CatagoryDetail extends React.Component {
         if (e.key === 'Enter') {
             this.getItems()
         }
-      }
+    }
     render() {
         let nameTag = this.state.query.length === 0 ? <p className="categoryText">Kategoriler</p> : <p>"{this.state.query}" için bulunan ürünler...</p> //Arda bunu sekil yap
         return (
@@ -99,7 +120,7 @@ class CatagoryDetail extends React.Component {
                                 onKeyDown={this._handleKeyDown}
                                 placeholder="Hangi ürünü aramıştınız?" />
                             <button onClick={() => this.getItems()} type="submit" className="searchButton">
-                                <img className="searchIcon" src={searchIcon} />
+                                <img className="searchIcon" src={searchIcon} alt="" />
                             </button>
                         </div>
                     </div>
@@ -109,11 +130,14 @@ class CatagoryDetail extends React.Component {
         );
     }
 }
-const mapStateToProps = ({ Redux: { shoppingItems } }) => ({
-    shoppingItems
+const mapStateToProps = ({ Redux: { shoppingItems, isVisibleBasket, shoppingItemCount, totalPrice } }) => ({
+    shoppingItems, isVisibleBasket, shoppingItemCount, totalPrice
 })
 const mapDispatchToProps = (dispatch) => ({
     setShoppingItem: (shoppingItems) => dispatch(shoppingItemsActions.setShoppingItem(shoppingItems)),
+    setIsVisibleBasket: (isVisibleBasket) => dispatch(shoppingItemsActions.setIsVisibleBasket(isVisibleBasket)),
+    setShoppingItemCount: (shoppingItemCount) => dispatch(shoppingItemsActions.setShoppingItemCount(shoppingItemCount)),
+    setTotalPrice: (totalPrice) => dispatch(shoppingItemsActions.setTotalPrice(totalPrice)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CatagoryDetail);
 
