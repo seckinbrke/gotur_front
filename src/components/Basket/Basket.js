@@ -14,10 +14,10 @@ class Basket extends React.Component {
         return this.props.shoppingItems.map((item, index) => {
             return (
                 <div key={index} className='CartItem'>
-                    <img alt="" style={{ width: 50, height: 50 }} src={item.productPhoto}></img>
-                    <p className='CartName'>{item.name}</p>
-                    <p className='CartName' style={{marginLeft:20}}>{item.price} ₺</p>
-                    <img onClick={() => this.deleteItem(item, index)} className="MinusIcon" src={MinusIcon}/>
+                    <img alt="" style={{ width: 40, height: 40,flex:0.2 }} src={item.productPhoto}></img>
+                    <p className='CartName' style={{flex:0.7}}>{item.name}</p>
+                    <p className='CartName' style={{marginLeft:10}} style={{flex:0.1}}>{item.price}₺</p>
+                    <img onClick={() => this.deleteItem(item, index)}  className="MinusIcon" style={{flex:0.1}}src={MinusIcon}/>
                 </div>
             )
         })

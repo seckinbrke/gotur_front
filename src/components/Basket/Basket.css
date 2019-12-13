@@ -32,10 +32,11 @@
     flex-direction: row;
     display: flex;
     margin: 10px;
+    align-items: center;
 }
 .CartName{
     color: #5D3DBD;
-    font-size: 16px;
+    font-size: 15px;
     margin-left: 5px;
     margin-top: 12px;
 }
@@ -49,7 +50,7 @@
     position: fixed;
     flex: 1;
     background: rgb(236, 212, 76);
-    border-radius: 2px;
+    border-radius: 7px;
     z-index: 546;
     flex-direction: column;
     overflow-y: scroll;
