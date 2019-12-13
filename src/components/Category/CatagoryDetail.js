@@ -81,6 +81,7 @@ class CatagoryDetail extends React.Component {
         console.log(total)
         localStorage.setItem('totalPrice', total);
         this.props.setTotalPrice(total);
+        //
     }
 
     renderItems = () => {
