@@ -21,17 +21,17 @@
     right: 0px;
 
 }
-.BoxDiv{
-    padding: 15px;
-    background: #FFD10D;
-    border-radius: 100000px;
-}
 .CartItem {
     height: 50px;
     width: 260px;
     flex-direction: row;
     display: flex;
-    margin: 10px;
+    margin-top: 10px;
+    border: solid 0.5px white;
+    border-bottom: 0.5;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
     align-items: center;
 }
 .CartName{
@@ -57,4 +57,30 @@
 }
 .Checkout{
     float: inline-end;
+}
+.TotalPriceText{
+    font-weight: bold;
+    margin-left: 10px;
+    
+}
+.TotalPriceDiv{
+    float: inline-end;
+    position: relative;
+    justify-content: flex-end;
+    z-index: 151515;
+    background: #5D3DBD;
+    width: 300px;
+    height: 30px;
+}
+.ItemCount{
+    color: #5D3DBD;
+    font-size: 15px;
+}
+.BoxDiv{
+    padding: 10px;
+    background: #FFD10D;
+    border-radius: 105454545px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

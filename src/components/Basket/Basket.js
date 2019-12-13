@@ -13,12 +13,12 @@ class Basket extends React.Component {
         console.log(this.props)
         return this.props.shoppingItems.map((item, index) => {
             return (
-                <div key={index} className='CartItem'>
-                    <img alt="" style={{ width: 40, height: 40,flex:0.2 }} src={item.productPhoto}></img>
-                    <p className='CartName' style={{flex:0.7}}>{item.name}</p>
-                    <p className='CartName' style={{marginLeft:10}} style={{flex:0.1}}>{item.price}₺</p>
-                    <img onClick={() => this.deleteItem(item, index)}  className="MinusIcon" style={{flex:0.1}}src={MinusIcon}/>
-                </div>
+                <li key={index} className='CartItem'>
+                    <img alt="" style={{ width: 30, height: 30, flex: 0.1,borderRadius:10 }} src={item.productPhoto}></img>
+                    <p className='CartName' style={{ flex: 0.8,fontSize:13 }}>{item.name}</p>
+                    <p className='CartName' style={{ marginLeft: 10 }} style={{ flex: 0.1 }}>{item.price}₺</p>
+                    <img onClick={() => this.deleteItem(item, index)} className="MinusIcon" style={{ flex: 0.1 }} src={MinusIcon} />
+                </li>
             )
         })
     }
@@ -46,7 +46,9 @@ class Basket extends React.Component {
             return (
                 <div className="ShoppingCart">
                     <ul className='ShoppingList'> {this.renderItems()}</ul>
-                    <div className='Checkout'>{this.props.totalPrice}</div>
+                    <div className="TotalPriceDiv">
+                        <p className={"TotalPriceText"}>Toplam: {this.props.totalPrice} ₺</p>
+                    </div>
                 </div>
             )
         }
@@ -60,7 +62,7 @@ class Basket extends React.Component {
                 }} className="MainDiv" >
                     <div className="BoxDiv">
                         <i className="fas fa-shopping-cart"></i>
-                        {this.props.shoppingItemCount}
+                        <p className="ItemCount">{this.props.shoppingItemCount}</p>
                     </div>
                 </div>
             </div>
