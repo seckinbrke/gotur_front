@@ -7,9 +7,19 @@
     overflow: hidden;
     z-index: 3;
 }
+.ShoppingList{
+    padding: 10px;
+}
 .Image {
     height: 50px;
     width: 50px;
+}
+.MinusIcon{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    right: 0px;
+
 }
 .BoxDiv{
     padding: 15px;
@@ -18,13 +28,16 @@
 }
 .CartItem {
     height: 50px;
-    width: 200px;
+    width: 260px;
     flex-direction: row;
     display: flex;
+    margin: 10px;
 }
 .CartName{
-    color: white;
-    font-size: 10px;
+    color: #5D3DBD;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 12px;
 }
 .ShoppingCart{
     width: 300px;
@@ -35,9 +48,12 @@
     margin-bottom: 80px;
     position: fixed;
     flex: 1;
-    background: blue;
+    background: rgb(236, 212, 76);
     border-radius: 2px;
     z-index: 546;
     flex-direction: column;
-    overflow-y: scroll,
+    overflow-y: scroll;
+}
+.Checkout{
+    float: inline-end;
 }

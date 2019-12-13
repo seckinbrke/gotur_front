@@ -2,6 +2,7 @@ import React from 'react';
 import './Basket.css'
 import { connect } from 'react-redux'
 import { actions as shoppingItemsActions } from '../../duck/reducers/Redux';
+import MinusIcon from '../../img/minusIcon.png'
 
 class Basket extends React.Component {
     state = {
@@ -16,7 +17,7 @@ class Basket extends React.Component {
                     <img alt="" style={{ width: 50, height: 50 }} src={item.productPhoto}></img>
                     <p className='CartName'>{item.name}</p>
                     <p className='CartName' style={{marginLeft:20}}>{item.price} ₺</p>
-                    <i onClick={() => this.deleteItem(item, index)} className="fas fa-minus" style={{ marginLeft: 20 }}></i>
+                    <img onClick={() => this.deleteItem(item, index)} className="MinusIcon" src={MinusIcon}/>
                 </div>
             )
         })
@@ -44,8 +45,8 @@ class Basket extends React.Component {
         if (this.props.isVisibleBasket) {
             return (
                 <div className="ShoppingCart">
-                    <ul> {this.renderItems()}</ul>
-                    <h3>{this.props.totalPrice}</h3>
+                    <ul className='ShoppingList'> {this.renderItems()}</ul>
+                    <div className='Checkout'>{this.props.totalPrice}</div>
                 </div>
             )
         }

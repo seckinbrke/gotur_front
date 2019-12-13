@@ -34,8 +34,8 @@ class Root extends React.Component {
                             <Route path="/catagoryDetail" component={CatagoryDetail} />
                         </Switch>
                         <Basket />
-                        {/* <button onClick={() => this.func()} style={{ width: 100, height: 100, backgroundColor: 'goldenrod', zIndex: 155 }}>
-                        </button> */}
+                        <button onClick={() => this.func()} style={{ width: 100, height: 100, backgroundColor: 'goldenrod', zIndex: 155 }}>
+                        </button> 
                     </div>
                 </Router >
             </Provider>

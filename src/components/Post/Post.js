@@ -1,10 +1,11 @@
 import React from 'react';
 import './Post.css';
+import plusIcon from '../../img/plusIcon.png';
 
 const Post = (props) => (
     <article onClick={() => props.onClick()} className="Post" style={{ flex: 1 }}>
         <div className="PlusIconDiv">
-        <i className="fas fa-plus"></i>
+        <img className='PlusIcon' src={plusIcon}/>
         </div>
         <div style={{ flex: 0.3 }}>
             <h3 className="Title">{props.title}</h3>
