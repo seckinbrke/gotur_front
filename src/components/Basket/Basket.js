@@ -45,9 +45,10 @@ class Basket extends React.Component {
         if (this.props.isVisibleBasket) {
             return (
                 <div className="ShoppingCart">
+                    <div className="BasketTitle">Sepetim</div>
                     <ul className='ShoppingList'> {this.renderItems()}</ul>
                     <div className="TotalPriceDiv">
-                        <p className={"TotalPriceText"}>Toplam: {this.props.totalPrice} ₺</p>
+                    <p className={"TotalPriceText"}>Toplam: {this.props.totalPrice} ₺</p>
                     </div>
                 </div>
             )
