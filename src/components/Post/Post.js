@@ -1,12 +1,12 @@
 import React from 'react';
 import './Post.css';
 import plusIcon from '../../img/plusIcon.png';
-
+{/* <div onClick={() => props.onClickPlus()}  className="PlusIconDiv">
+<img style={{ width: 30, height: 30 }} className='PlusIcon' src={plusIcon} alt =""/>
+</div> */}
 const Post = (props) => (
-    <article onClick={() => props.onClick()} className="Post" style={{ flex: 1 }}>
-        <div className="PlusIconDiv">
-            <img style={{ width: 20, height: 20 }} className='PlusIcon' src={plusIcon} />
-        </div>
+    <div onClick={() => props.onClick()} className="Post" style={{ flex: 1 }}>
+       
         <div style={{ flex: 0.3 }}>
             <h3 className="Title">{props.title}</h3>
         </div>
@@ -16,7 +16,7 @@ const Post = (props) => (
         <div style={{ flex: 0.1 }}>
             <h3 className="Price">{props.price} ₺</h3>
         </div>
-    </article>
+    </div>
 );
 
 export default Post;

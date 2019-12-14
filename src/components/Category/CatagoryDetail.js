@@ -9,6 +9,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { connect } from 'react-redux';
 import { actions as shoppingItemsActions } from '../../duck/reducers/Redux';
 
+
 class CatagoryDetail extends React.Component {
     state = {
         data: [],
@@ -16,7 +17,9 @@ class CatagoryDetail extends React.Component {
         categoryItems: [],
         query: "",
         error: false,
-        isVisible: true
+        isVisible: true,
+        showPopup: false,
+        selectedItem: {}
     }
     componentDidMount() {
         this.getItem();
@@ -61,6 +64,29 @@ class CatagoryDetail extends React.Component {
                 this.setState({ data: this.state.unfiltredItems })
         });
     }
+
+    renderPopUp() {
+        const { showPopup, selectedItem } = this.state;
+        if (showPopup) {
+            return (
+                <div className='popup'>
+                    <div className='popup_inner'>
+                        <button onClick={() => this.setState({ showPopup: !showPopup })}>X</button>
+                        <h1>{selectedItem.name}</h1>
+                        <h5>{selectedItem.subType}</h5>
+                        <img style={{ width: 50, height: 50 }} src={selectedItem.productPhoto} alt="" />
+                        <h1>{selectedItem.price} ₺</h1>
+                        <button onClick={() => this.mergeItems(selectedItem)}>Sepete Ekle</button>
+                    </div>
+                </div >
+            );
+        }
+    }
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
+    }
     /*
     store.subscribe(() => {
     // persist your state
@@ -83,22 +109,22 @@ class CatagoryDetail extends React.Component {
         this.props.setTotalPrice(total);
         //
     }
-
     renderItems = () => {
         if (this.state.isVisible) {
             return (
                 <Spinner />
             )
         }
+        //this.mergeItems(data)
         else {
             return this.state.data.map(data => {
                 return <Post key={data._id}
                     title={data.name}
                     link={data.productPhoto}
                     price={data.price}
-                    onClick={() => { this.mergeItems(data) }} />
+                    onClickPlus={() => {this.mergeItems(data)}}
+                    onClick={() => { this.setState({ selectedItem: data, showPopup: true }) }} />
             })
-
         }
     }
     _handleKeyDown = (e) => {
@@ -110,6 +136,7 @@ class CatagoryDetail extends React.Component {
         let nameTag = this.state.query.length === 0 ? <p className="categoryText">Kategoriler</p> : <p>"{this.state.query}" için bulunan ürünler...</p> //Arda bunu sekil yap
         return (
             <Auxx>
+                {this.renderPopUp()}
                 <div className="MainPage">
                     <div className="wrap">
                         <div className="search">
