@@ -8,7 +8,7 @@ import searchIcon from '../../img/search.png';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { connect } from 'react-redux';
 import { actions as shoppingItemsActions } from '../../duck/reducers/Redux';
-
+import './CatagoryDetail.css';
 
 class CatagoryDetail extends React.Component {
     state = {
@@ -71,12 +71,12 @@ class CatagoryDetail extends React.Component {
             return (
                 <div className='popup'>
                     <div className='popup_inner'>
-                        <button onClick={() => this.setState({ showPopup: !showPopup })}>X</button>
-                        <h1>{selectedItem.name}</h1>
-                        <h5>{selectedItem.subType}</h5>
-                        <img style={{ width: 50, height: 50 }} src={selectedItem.productPhoto} alt="" />
-                        <h1>{selectedItem.price} ₺</h1>
-                        <button onClick={() => this.mergeItems(selectedItem)}>Sepete Ekle</button>
+                        <button className='ExitButton' onClick={() => this.setState({ showPopup: !showPopup })}>X</button>
+                        <h1 className='PopUpName'>{selectedItem.name}</h1>
+                        <h5 className='PopUpSubType'>{selectedItem.subType}</h5>
+                        <img className='PopUpImage'src={selectedItem.productPhoto} alt="" />
+                        <h1 className='PopUpPrice'>{selectedItem.price} ₺</h1>
+                        <button className='PopUpButton' onClick={() => this.mergeItems(selectedItem)}>Sepete Ekle</button>
                     </div>
                 </div >
             );

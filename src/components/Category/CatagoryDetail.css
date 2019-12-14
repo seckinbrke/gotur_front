@@ -1,0 +1,79 @@
+
+.PopUpImage{
+    width: 160px;
+    height: 160px;
+    border: solid 2px;
+    border-color: #5D3DBD;
+}
+.PopUpPrice{
+    color: #5D3DBD;
+}
+.PopUpSubType{
+    color: #5D3DBD;
+}
+.PopUpName{
+    color: #5D3DBD;
+}
+.popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, 0.5);
+  }
+  .popup_inner {
+    position: absolute;
+    border-radius: 10px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    left: 25%;
+    right: 25%;
+    top: 20%;
+    bottom: 20%;
+    margin: auto;
+    background: white;
+  }
+  .PopUpButton{
+    border-radius: 5px;
+    background-color: #FFD10D;
+    color: #5D3DBD;
+    font-weight: bold;
+  }
+  .ExitButton{
+    position: relative;
+    left: 44.3%;
+    margin: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 750px){
+    .popup_inner {
+        left: 0%;
+        right: 0%;
+        top: 0%;
+        bottom: 0%;
+        z-index: 10;
+      }
+    .PopUpButton{
+        position: relative;
+        top: 20%;
+    }
+    .PopUpPrice{
+        position: relative;
+        top: 15%;
+        color: #5D3DBD;
+    }
+    .PopUpImage{
+        position: relative;
+        top: 10%;
+        width: 240px;
+        height: 240px;
+    }
+    .PopUpSubType{
+        position: relative;
+        top: 5%;
+    }
+
+
+  }
