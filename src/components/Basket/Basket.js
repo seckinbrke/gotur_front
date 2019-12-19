@@ -6,7 +6,8 @@ import MinusIcon from '../../img/minusIcon.png'
 
 class Basket extends React.Component {
     state = {
-        shoppingItemCount: this.props.shoppingItemCount
+        shoppingItemCount: this.props.shoppingItemCount,
+        showAlert: false
     }
 
     renderItems() {
@@ -40,7 +41,25 @@ class Basket extends React.Component {
         this.props.setTotalPrice(totalPrice - item.price)
 
     }
+    renderPopUp() {
+        const { showAlert } = this.state;
+        if (showAlert) {
+            return (
+                <div className='Alert'>
+                    <div className='Alert_inner'>
+                    <h1 className='AlertName'>Siparişleriniz yola çıktı.</h1>
+                    <h5 className='AlertSubType'>Götür dedin götürüyoruz.</h5>
+                        <button className='AlertButton' onClick={() => {this.setState({ showAlert: !showAlert })}}>Götür bakalım</button>
+                    </div>
+                </div >
+            );
+        }
+    }
     orderCompleted() {
+        this.setState({
+            showAlert: !this.state.showAlert
+        });
+        this.props.setIsVisibleBasket(false);
         localStorage.setItem('shoppingItems', JSON.stringify([]));
         localStorage.setItem('shoppingItemCount', "0");
         localStorage.setItem('totalPrice', "0");
@@ -49,7 +68,7 @@ class Basket extends React.Component {
         this.props.setShoppingItemCount(0);
         this.props.setTotalPrice(0);
 
-        alert('Götür dediniz götürdük!');
+        // alert('Götür dediniz götürdük!');
     }
 
     renderShoppingCart = () => {
@@ -69,6 +88,7 @@ class Basket extends React.Component {
     render() {
         return (
             <div>
+                {this.renderPopUp()}
                 {this.renderShoppingCart()}
                 <div onClick={() => {
                     this.props.setIsVisibleBasket(!this.props.isVisibleBasket)

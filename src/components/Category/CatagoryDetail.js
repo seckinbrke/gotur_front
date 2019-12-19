@@ -87,11 +87,6 @@ class CatagoryDetail extends React.Component {
             showPopup: !this.state.showPopup
         });
     }
-    /*
-    store.subscribe(() => {
-    // persist your state
-    })
-    */
     mergeItems = (item) => {
         this.props.setTotalPrice(0);
         let mergedItems = this.props.shoppingItems;

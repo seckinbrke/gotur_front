@@ -107,3 +107,59 @@
     color: #5D3DBD;
     border-radius: 3px;
 }
+.Alert {
+    /* top: 0; */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0, 0.5);
+  }
+  .Alert_inner {
+    border-radius: 10px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    width: 500px;
+    margin-bottom: 200px;
+    background: white;
+  }
+  .AlertButton{
+    border-radius: 5px;
+    background-color: #FFD10D;
+    color: #5D3DBD;
+    font-weight: bold;
+  }
+  .AlertName{
+    color: #5D3DBD;
+    text-align: center;
+}
+  .AlertButton{
+    position: relative;
+    margin: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: #5D3DBD;
+    color: ivory;
+  }
+  .AlertSubType{
+    color: black;
+}
+
+  @media screen and (max-width: 750px){
+    .Alert_inner {
+        left: 0%;
+        right: 0%;
+        top: 0%;
+        bottom: 0%;
+        z-index: 10;
+      }
+    .AlertButton{
+        position: relative;
+        top: 10%;
+    }
+  }
