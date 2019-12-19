@@ -40,6 +40,17 @@ class Basket extends React.Component {
         this.props.setTotalPrice(totalPrice - item.price)
 
     }
+    orderCompleted() {
+        localStorage.setItem('shoppingItems', JSON.stringify([]));
+        localStorage.setItem('shoppingItemCount', "0");
+        localStorage.setItem('totalPrice', "0");
+
+        this.props.setShoppingItem([])
+        this.props.setShoppingItemCount(0);
+        this.props.setTotalPrice(0);
+
+        alert('Götür dediniz götürdük!');
+    }
 
     renderShoppingCart = () => {
         if (this.props.isVisibleBasket) {
@@ -48,7 +59,8 @@ class Basket extends React.Component {
                     <div className="BasketTitle">Sepetim</div>
                     <ul className='ShoppingList'> {this.renderItems()}</ul>
                     <div className="TotalPriceDiv">
-                    <p className={"TotalPriceText"}>Toplam: {this.props.totalPrice} ₺</p>
+                    <p className="TotalPriceText">Toplam: {this.props.totalPrice} ₺</p>
+                    <button onClick={() => this.orderCompleted()} className="CheckOut">Siparişi Tamamla</button>
                     </div>
                 </div>
             )

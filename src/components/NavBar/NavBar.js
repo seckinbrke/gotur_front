@@ -19,7 +19,7 @@ export default Headers = () => {
                     </Nav.Link>
                 </Nav>
                 <Nav>
-                    <Nav.Link href="#deets">
+                    <Nav.Link >
                         <img className="icon" src={icon} alt="" />
                     </Nav.Link>
 

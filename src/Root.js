@@ -16,12 +16,6 @@ import { connect } from 'react-redux';
 export const history = createHistory({ forceRefresh: true })
 
 class Root extends React.Component {
-    func() {
-        localStorage.setItem('shoppingItems', JSON.stringify([]));
-        localStorage.setItem('shoppingItemCount', "0");
-        localStorage.setItem('totalPrice', "0");
-        console.log("aasdf")
-    }
     render() {
         console.log(this.props.shoppingItems)
         return (
@@ -34,8 +28,6 @@ class Root extends React.Component {
                             <Route path="/catagoryDetail" component={CatagoryDetail} />
                         </Switch>
                         <Basket />
-                        <button onClick={() => this.func()} style={{ width: 100, height: 100, backgroundColor: 'goldenrod', zIndex: 155 }}>
-                        </button> 
                     </div>
                 </Router >
             </Provider>
