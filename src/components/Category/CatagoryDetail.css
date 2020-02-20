@@ -49,6 +49,10 @@
     background-color: #5D3DBD;
     color: ivory;
   }
+  .Catagories{
+    display: flex;
+    flex-direction: row;
+  }
 
   @media screen and (max-width: 750px){
     .popup_inner {

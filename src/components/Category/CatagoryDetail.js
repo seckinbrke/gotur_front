@@ -9,6 +9,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { connect } from 'react-redux';
 import { actions as shoppingItemsActions } from '../../duck/reducers/Redux';
 import './CatagoryDetail.css';
+import Basket from '../Basket/Basket';
 
 class CatagoryDetail extends React.Component {
     state = {
@@ -74,7 +75,7 @@ class CatagoryDetail extends React.Component {
                         <button className='ExitButton' onClick={() => this.setState({ showPopup: !showPopup })}>X</button>
                         <h1 className='PopUpName'>{selectedItem.name}</h1>
                         <h5 className='PopUpSubType'>{selectedItem.subType}</h5>
-                        <img className='PopUpImage'src={selectedItem.productPhoto} alt="" />
+                        <img className='PopUpImage' src={selectedItem.productPhoto} alt="" />
                         <h1 className='PopUpPrice'>{selectedItem.price} ₺</h1>
                         <button className='PopUpButton' onClick={() => this.mergeItems(selectedItem)}>Sepete Ekle</button>
                     </div>
@@ -117,7 +118,7 @@ class CatagoryDetail extends React.Component {
                     title={data.name}
                     link={data.productPhoto}
                     price={data.price}
-                    onClickPlus={() => {this.mergeItems(data)}}
+                    onClickPlus={() => { this.mergeItems(data) }}
                     onClick={() => { this.setState({ selectedItem: data, showPopup: true }) }} />
             })
         }
@@ -146,9 +147,18 @@ class CatagoryDetail extends React.Component {
                                 <img className="searchIcon" src={searchIcon} alt="" />
                             </button>
                         </div>
+
+                    </div>
+                    <div className="Catagories">
+                        <h5>text</h5>
+                        <h5>text</h5>
+                        <h5>text</h5>
+                        <h5>text</h5>
+                        <h5>text</h5>
                     </div>
                 </div>
                 {this.renderItems()}
+                <Basket/>
             </Auxx>
         );
     }

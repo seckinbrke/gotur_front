@@ -9,6 +9,7 @@ import Spinner from '../components/Spinner/Spinner';
 import CategoryItem from '../components/Category/CategoryItem/CategoryItem';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { history } from '../App';
+import Basket from '../components/Basket/Basket';
 
 
 
@@ -67,6 +68,7 @@ class MainPage extends React.Component {
             
                 <Auxx>
                     {this.renderItems()}
+                    <Basket/>
                 </Auxx>
 
 
