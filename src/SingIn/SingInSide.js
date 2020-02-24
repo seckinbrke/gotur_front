@@ -35,11 +35,10 @@ export default function SignInSide() {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-           
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            götür
+          {/*<Avatar className={classes.avatar}>
+          </Avatar> */}
+          <Typography component="h1" variant="h5"style={{color: '#4F34A3'}}>
+            Üye Girişi
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -126,5 +125,7 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor:'#4F34A3'
   },
+  
 }));
