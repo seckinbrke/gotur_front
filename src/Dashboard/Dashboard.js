@@ -17,6 +17,7 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 //import Chart from './Chart';
@@ -101,24 +102,24 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
- 
+
 }));
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
-    setOpen(false);
+    setOpen(!open);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      
+
       <Drawer
         variant="permanent"
         classes={{
@@ -127,8 +128,8 @@ export default function Dashboard() {
         open={open}
       >
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+          <IconButton onClick={handleDrawerClose}>     
+              {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
         <Divider />
@@ -141,9 +142,9 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
-            
+
             {/* Recent Deposits */}
-            
+
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
