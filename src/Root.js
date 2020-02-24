@@ -35,7 +35,7 @@ class Root extends React.Component {
                         <Headers />
                         <Switch>
                             <Route path="/" exact initial component={SignIn} />
-                            <Route path="/uyeOl" exact initial component={SignUp} />
+                            <Route path="/uyeOl" exact component={SignUp} />
                             <Route path="/mainMenu" exact component={MainPage} />
                             <Route path="/catagoryDetail" component={CatagoryDetail} />
                         </Switch>

@@ -79,9 +79,10 @@ export default function SignUpComp() {
         namee: "Seçkin",
         surname: "Özdemir",
         password: "1111111",
-        email: "seckinbrke12345@gmail.com",
+        email: "",
         passwordRepeat: "",
-        
+        erroremail: false,
+        errorpassword: false
     });
 
     const handleChange = name => event => {
@@ -95,31 +96,39 @@ export default function SignUpComp() {
         setValues({ ...values, [name]: value })
     }
     const singUp = async () => {
-
-        let REQUEST_URL = 'http://192.168.102.2:4000/users/create';
+        let errorss = ["erroremail", "errorpassword"];
+        for (let i = 0; i < errorss.length; i++) {
+             setValues({ ...values, [errorss[i]]: false })
+             console.warn(values.erroremail)
+        }
+        console.log(values.erroremail)
+        let REQUEST_URL = 'http://localhost:3001/users/create';
         let body = {
             name: values.namee,
             surname: values.surname,
             password: values.password,
             email: values.email,
-            address:"asdfads",
+            address: "asdfads",
             phoneNumber: 0 + values.phoneNumber,
-            creditCardNo:null,
-            creditCardDate:null,
-            creditCardCvc:null,
+            creditCardNo: null,
+            creditCardDate: null,
+            creditCardCvc: null,
         }
         console.log(body)
         await axios.post(REQUEST_URL, body)
             .then(response => response)
             .then(responseData => {
-                console.warn(responseData.data)
-
+                let errorKeys = Object.keys(responseData.data.errors);
+                for (let i = 0; i < errorKeys.length; i++) {
+             //       console.log(responseData.data.errors[errorKeys[i]].message)
+                    setValues({ ...values, ["error" + errorKeys[i]]: true })
+                }
             })
             .catch(error => {
+                console.log("sdfsd")
                 console.log(error)
             })
     }
-    console.log(values.password)
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -165,7 +174,7 @@ export default function SignUpComp() {
                             <TextField
                                 value={values.email}
                                 onChange={handleInputChange}
-                                error={false}
+                                error={values.erroremail}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -177,7 +186,7 @@ export default function SignUpComp() {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                error={false}
+                                error={values.errorpassword}
                                 value={values.password}
                                 onChange={handleInputChange}
                                 variant="outlined"
