@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
+import ErrorIcon from '@material-ui/icons/Error';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -18,6 +18,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Modal from '@material-ui/core/Modal';
 import axios from 'axios';
+
 
 function Copyright() {
     return (
@@ -54,10 +55,6 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         alignItems: 'center',
     },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(3),
@@ -90,7 +87,7 @@ const useStyles = makeStyles(theme => ({
     paperModal: {
         width: 400,
         backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
+        border: '2px solid 4F34A3',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
@@ -130,12 +127,21 @@ export default function SignUpComp() {
                 container={() => rootRef.current}
             >
                 <div className={classes.paperModal}>
-                    <h2 id="server-modal-title">Uyari</h2>
-                    <p id="server-modal-description">Tum alanlari dogru girdiginizden emin olunuz.</p>
-                    <button onClick={() => setValues({
-                        ...values,
-                        showAlert: false
-                    })}>Tamam</button>
+                    <div className={classes.paper} style={{marginTop: 0}}>
+                        <ErrorIcon style={{alignSelf: 'center',marginTop: 0, fontSize:60, marginBottom: 20, color: 'red'}}/>
+                        <h2 id="server-modal-title" className= {classes.paper} style={{marginTop: 0}}>Uyarı</h2>
+                        <p id="server-modal-description" className= {classes.paper} style={{marginTop: 0}}>Tüm alanları doğru girdiğinizden emin olunuz.</p>
+                        <Button 
+                            onClick={() => setValues({
+                                ...values,
+                                showAlert: false
+                            })}
+                            fullWidth
+                            variant="outlined"
+                            color="#4F34A3"
+                            className={classes.alertButton}
+                        >Tamam</Button>
+                    </div>
                 </div>
             </Modal>
         )
@@ -288,16 +294,15 @@ export default function SignUpComp() {
                         </Grid>
                     </Grid>
                     <Button
-                        //     type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
                         onClick={singUp}
                         className={classes.submit}
                         style={{backgroundColor: '#4F34A3'}}
-                    >
-                        Üye Ol
-                    </Button>
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                      >
+                       Üye ol
+                      </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
                             <Link href="#" variant="body2">
