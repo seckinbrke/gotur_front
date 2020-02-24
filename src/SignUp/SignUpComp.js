@@ -16,6 +16,7 @@ import MaskedInput from 'react-text-mask';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Modal from '@material-ui/core/Modal';
 import axios from 'axios';
 
 function Copyright() {
@@ -69,11 +70,36 @@ const useStyles = makeStyles(theme => ({
             margin: theme.spacing(1),
         },
     },
+    root1: {
+        height: 300,
+        flexGrow: 1,
+        minWidth: 300,
+        transform: 'translateZ(0)',
+        // The position fixed scoping doesn't work in IE 11.
+        // Disable this demo to preserve the others.
+        '@media all and (-ms-high-contrast: none)': {
+            display: 'none',
+        },
+    },
+    modal: {
+        display: 'flex',
+        padding: theme.spacing(1),
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    paperModal: {
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
 }));
 
 
 export default function SignUpComp() {
     const classes = useStyles();
+    const rootRef = React.useRef(null);
     const [values, setValues] = React.useState({
         phoneNumber: '5319221766',
         namee: "Seçkin",
@@ -82,55 +108,84 @@ export default function SignUpComp() {
         email: "",
         passwordRepeat: "",
         erroremail: false,
-        errorpassword: false
+        errorpassword: false,
+        showAlert: false
     });
-
-    const handleChange = name => event => {
-        setValues({
-            ...values,
-            [name]: event.target.value,
-        });
-    };
     const handleInputChange = e => {
         const { name, value } = e.target
         setValues({ ...values, [name]: value })
     }
+
+    const alertModal = () => {
+
+        return (
+            <Modal
+                disablePortal
+                disableEnforceFocus
+                disableAutoFocus
+                open={values.showAlert}
+                aria-labelledby="server-modal-title"
+                aria-describedby="server-modal-description"
+                className={classes.modal}
+                container={() => rootRef.current}
+            >
+                <div className={classes.paperModal}>
+                    <h2 id="server-modal-title">Uyari</h2>
+                    <p id="server-modal-description">Tum alanlari dogru girdiginizden emin olunuz.</p>
+                    <button onClick={() => setValues({
+                        ...values,
+                        showAlert: false
+                    })}>Tamam</button>
+                </div>
+            </Modal>
+        )
+    }
     const singUp = async () => {
-        let errorss = ["erroremail", "errorpassword"];
-        for (let i = 0; i < errorss.length; i++) {
-             setValues({ ...values, [errorss[i]]: false })
-             console.warn(values.erroremail)
-        }
-        console.log(values.erroremail)
-        let REQUEST_URL = 'http://localhost:3001/users/create';
-        let body = {
-            name: values.namee,
-            surname: values.surname,
-            password: values.password,
-            email: values.email,
-            address: "asdfads",
-            phoneNumber: 0 + values.phoneNumber,
-            creditCardNo: null,
-            creditCardDate: null,
-            creditCardCvc: null,
-        }
-        console.log(body)
-        await axios.post(REQUEST_URL, body)
-            .then(response => response)
-            .then(responseData => {
-                let errorKeys = Object.keys(responseData.data.errors);
-                for (let i = 0; i < errorKeys.length; i++) {
-             //       console.log(responseData.data.errors[errorKeys[i]].message)
-                    setValues({ ...values, ["error" + errorKeys[i]]: true })
-                }
+
+        if (
+            values.email.trim().length === 0 ||
+            values.password.trim().length === 0 ||
+            values.name.trim().length === 0 ||
+            values.surname.trim().length === 0 ||
+            values.phoneNumber.trim().length === 0
+        ) {
+            console.log('ASDFASD')
+            setValues({
+                ...values,
+                showAlert: true
             })
-            .catch(error => {
-                console.log("sdfsd")
-                console.log(error)
-            })
+        } else {
+            let REQUEST_URL = 'http://localhost:3001/users/create';
+            let body = {
+                name: values.namee,
+                surname: values.surname,
+                password: values.password,
+                email: values.email,
+                address: "asdfads",
+                phoneNumber: 0 + values.phoneNumber,
+                creditCardNo: null,
+                creditCardDate: null,
+                creditCardCvc: null,
+            }
+            console.log(body)
+            await axios.post(REQUEST_URL, body)
+                .then(response => response)
+                .then(responseData => {
+                    let errorKeys = Object.keys(responseData.data.errors);
+                    for (let i = 0; i < errorKeys.length; i++) {
+                        //       console.log(responseData.data.errors[errorKeys[i]].message)
+                        setValues({ ...values, ["error" + errorKeys[i]]: true })
+                    }
+                })
+                .catch(error => {
+                    console.log("sdfsd")
+                    console.log(error)
+                })
+        }
     }
     return (
         <Container component="main" maxWidth="xs">
+            {alertModal()}
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
