@@ -16,6 +16,8 @@ import store from "./duck/index";
 import { connect } from 'react-redux';
 import SignIn from './SingIn/SignIn';
 import SignUp from './SignUp/SignUp';
+import Dashboard from './Dashboard/Dashboard';
+
 export const history = createHistory({ forceRefresh: true })
 
 class Root extends React.Component {
@@ -38,6 +40,7 @@ class Root extends React.Component {
                             <Route path="/uyeOl" exact component={SignUp} />
                             <Route path="/mainMenu" exact component={MainPage} />
                             <Route path="/catagoryDetail" component={CatagoryDetail} />
+                            <Route path="/dashboard" component={Dashboard}/>
                         </Switch>
                         {/*this.basket()*/}
                     </div>
