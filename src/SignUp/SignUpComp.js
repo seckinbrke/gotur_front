@@ -188,10 +188,7 @@ export default function SignUpComp() {
             {alertModal()}
             <CssBaseline />
             <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-
-                </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h5" style={{color: '#4F34A3'}}>
                     Üye Ol
                 </Typography>
                 <form className={classes.form} noValidate>
@@ -297,6 +294,7 @@ export default function SignUpComp() {
                         color="primary"
                         onClick={singUp}
                         className={classes.submit}
+                        style={{backgroundColor: '#4F34A3'}}
                     >
                         Üye Ol
                     </Button>
