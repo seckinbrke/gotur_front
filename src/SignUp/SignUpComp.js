@@ -267,7 +267,7 @@ export default function SignUpComp() {
                         <Grid item xs={12}>
                             <TextField
                                 value={values.email}
-                                onFocusCapture={() => emailApiCheck()}
+                                onPointerLeave={emailApiCheck}
                                 onChange={handleInputChange}
                                 error={values.erroremail}
                                 helperText={values.hasMail ? "Bu mail kullanılmaktadır." : ""}
