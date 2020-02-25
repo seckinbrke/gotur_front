@@ -17,6 +17,9 @@ export default Headers = () => {
                     <Nav.Link >
                         <span onClick={()=> history.push({ pathname: "/"})} className="pages">anasayfa</span>
                     </Nav.Link>
+                    <Nav.Link >
+                        <span onClick={()=> history.push({ pathname: "/"})} className="pages">çıkış</span>
+                    </Nav.Link>
                 </Nav>
                 <Nav>
                     <Nav.Link >

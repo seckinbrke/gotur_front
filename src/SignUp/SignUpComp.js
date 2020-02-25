@@ -3,8 +3,6 @@ import ErrorIcon from '@material-ui/icons/Error';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -12,9 +10,11 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import MaskedInput from 'react-text-mask';
 import Modal from '@material-ui/core/Modal';
 import axios from 'axios';
+import { history } from '../App';
 
 
 function Copyright() {
@@ -92,6 +92,9 @@ const useStyles = makeStyles(theme => ({
     alertButton: {
         backgroundColor: '#5D3DBD',
         color: '#FFD10D'
+    },
+    helperText: {
+        color: 'red'
     }
 }));
 
@@ -100,10 +103,10 @@ export default function SignUpComp() {
     const classes = useStyles();
     const rootRef = React.useRef(null);
     const [values, setValues] = React.useState({
-        phoneNumber: '5319221766',
-        namee: "Seçkin",
-        surname: "Özdemir",
-        password: "1111111",
+        phoneNumber: '5',
+        namee: "",
+        surname: "",
+        password: "",
         email: "",
         passwordRepeat: "",
         hasMail: false,
@@ -141,7 +144,6 @@ export default function SignUpComp() {
                     ...values,
                     hasMail: responseData.data
                 })
-                console.log(responseData.data)
             })
             .catch(error => {
                 console.log(error)
@@ -195,6 +197,7 @@ export default function SignUpComp() {
             let checkPhone = checkPhoneNumber();
             if (checkPass === false || checkPhone === false) {
                 alert('Bilgilerinizi kontrol ediniz.')
+                //Buraya güzel alert tasarla
             } else {
                 let REQUEST_URL = 'http://localhost:3001/users/create';
                 let body = {
@@ -207,15 +210,15 @@ export default function SignUpComp() {
                     creditCardNo: null,
                     creditCardDate: null,
                     creditCardCvc: null,
+                    isAdmin:false
                 }
                 console.log(body)
                 await axios.post(REQUEST_URL, body)
                     .then(response => response)
                     .then(responseData => {
-                        let errorKeys = Object.keys(responseData.data.errors);
-                        for (let i = 0; i < errorKeys.length; i++) {
-                            //       console.log(responseData.data.errors[errorKeys[i]].message)
-                            setValues({ ...values, ["error" + errorKeys[i]]: true })
+                        if(responseData.status === 200){
+                            console.log(responseData)
+                            history.push({ pathname: "/anasayfa"})
                         }
                     })
                     .catch(error => {
@@ -270,7 +273,7 @@ export default function SignUpComp() {
                                 onPointerLeave={emailApiCheck}
                                 onChange={handleInputChange}
                                 error={values.erroremail}
-                                helperText={values.hasMail ? "Bu mail kullanılmaktadır." : ""}
+                                //helperText={values.hasMail ? "Bu mail kullanılmaktadır." : ""}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -279,6 +282,7 @@ export default function SignUpComp() {
                                 name="email"
                                 autoComplete="email"
                             />
+                            <FormHelperText className={classes.helperText} >{values.hasMail ? "Bu mail kullanılmaktadır." : ""}</FormHelperText>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
@@ -288,13 +292,14 @@ export default function SignUpComp() {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                helperText="Şifre en az 7 haneli olmalıdır."
+                                //helperText="Şifre en az 7 haneli olmalıdır."
                                 name="password"
                                 label="Şifre"
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
                             />
+                            <FormHelperText className={classes.helperText}>{values.password.length < 7 ? "Şifre en az 7 haneli olmalıdır." : ""}</FormHelperText>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
@@ -323,12 +328,6 @@ export default function SignUpComp() {
                                 fullWidth
                                 id="phoneNumber"
                                 label="Telefon Numarası"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                label="Yeni gelişmeler hakkında mail üzerinden bilgi almak istiyorum."
                             />
                         </Grid>
                     </Grid>
