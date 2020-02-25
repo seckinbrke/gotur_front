@@ -13,9 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import MaskedInput from 'react-text-mask';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import Modal from '@material-ui/core/Modal';
 import axios from 'axios';
 
@@ -86,11 +83,16 @@ const useStyles = makeStyles(theme => ({
     },
     paperModal: {
         width: 400,
+        borderRadius: 10,
         backgroundColor: theme.palette.background.paper,
         border: '2px solid 4F34A3',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
+    alertButton: {
+        backgroundColor: '#5D3DBD',
+        color: '#FFD10D'
+    }
 }));
 
 
@@ -104,6 +106,7 @@ export default function SignUpComp() {
         password: "1111111",
         email: "",
         passwordRepeat: "",
+        hasMail: false,
         erroremail: false,
         errorpassword: false,
         showAlert: false
@@ -112,9 +115,39 @@ export default function SignUpComp() {
         const { name, value } = e.target
         setValues({ ...values, [name]: value })
     }
-
+    const checkPassword = () => {
+        if (values.password !== values.passwordRepeat || values.password.trim().length < 7) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    const checkPhoneNumber = () => {
+        if (values.phoneNumber.trim().length < 10) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    const emailApiCheck = async () => {
+        let REQUEST_URL = 'http://localhost:3001/users/emailcheck';
+        let body = {
+            email: values.email
+        }
+        await axios.post(REQUEST_URL, body)
+            .then(response => response)
+            .then(responseData => {
+                setValues({
+                    ...values,
+                    hasMail: responseData.data
+                })
+                console.log(responseData.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
     const alertModal = () => {
-
         return (
             <Modal
                 disablePortal
@@ -127,18 +160,17 @@ export default function SignUpComp() {
                 container={() => rootRef.current}
             >
                 <div className={classes.paperModal}>
-                    <div className={classes.paper} style={{marginTop: 0}}>
-                        <ErrorIcon style={{alignSelf: 'center',marginTop: 0, fontSize:60, marginBottom: 20, color: 'red'}}/>
-                        <h2 id="server-modal-title" className= {classes.paper} style={{marginTop: 0}}>Uyarı</h2>
-                        <p id="server-modal-description" className= {classes.paper} style={{marginTop: 0}}>Tüm alanları doğru girdiğinizden emin olunuz.</p>
-                        <Button 
+                    <div className={classes.paper} style={{ marginTop: 0 }}>
+                        <ErrorIcon style={{ alignSelf: 'center', marginTop: 0, fontSize: 60, marginBottom: 20, color: '#5D3DBD' }} />
+                        <h2 id="server-modal-title" className={classes.paper} style={{ marginTop: 0 }}>Uyarı</h2>
+                        <p id="server-modal-description" className={classes.paper} style={{ marginTop: 0 }}>Tüm alanları doğru girdiğinizden emin olunuz.</p>
+                        <Button
                             onClick={() => setValues({
                                 ...values,
                                 showAlert: false
                             })}
                             fullWidth
                             variant="outlined"
-                            color="#4F34A3"
                             className={classes.alertButton}
                         >Tamam</Button>
                     </div>
@@ -147,46 +179,50 @@ export default function SignUpComp() {
         )
     }
     const singUp = async () => {
-
         if (
             values.email.trim().length === 0 ||
             values.password.trim().length === 0 ||
-            values.name.trim().length === 0 ||
+            values.namee.trim().length === 0 ||
             values.surname.trim().length === 0 ||
             values.phoneNumber.trim().length === 0
         ) {
-            console.log('ASDFASD')
             setValues({
                 ...values,
                 showAlert: true
             })
         } else {
-            let REQUEST_URL = 'http://localhost:3001/users/create';
-            let body = {
-                name: values.namee,
-                surname: values.surname,
-                password: values.password,
-                email: values.email,
-                address: "asdfads",
-                phoneNumber: 0 + values.phoneNumber,
-                creditCardNo: null,
-                creditCardDate: null,
-                creditCardCvc: null,
+            let checkPass = checkPassword();
+            let checkPhone = checkPhoneNumber();
+            if (checkPass === false || checkPhone === false) {
+                alert('Bilgilerinizi kontrol ediniz.')
+            } else {
+                let REQUEST_URL = 'http://localhost:3001/users/create';
+                let body = {
+                    name: values.namee,
+                    surname: values.surname,
+                    password: values.password,
+                    email: values.email,
+                    address: "asdfads",
+                    phoneNumber: 0 + values.phoneNumber,
+                    creditCardNo: null,
+                    creditCardDate: null,
+                    creditCardCvc: null,
+                }
+                console.log(body)
+                await axios.post(REQUEST_URL, body)
+                    .then(response => response)
+                    .then(responseData => {
+                        let errorKeys = Object.keys(responseData.data.errors);
+                        for (let i = 0; i < errorKeys.length; i++) {
+                            //       console.log(responseData.data.errors[errorKeys[i]].message)
+                            setValues({ ...values, ["error" + errorKeys[i]]: true })
+                        }
+                    })
+                    .catch(error => {
+                        console.log("sdfsd")
+                        console.log(error)
+                    })
             }
-            console.log(body)
-            await axios.post(REQUEST_URL, body)
-                .then(response => response)
-                .then(responseData => {
-                    let errorKeys = Object.keys(responseData.data.errors);
-                    for (let i = 0; i < errorKeys.length; i++) {
-                        //       console.log(responseData.data.errors[errorKeys[i]].message)
-                        setValues({ ...values, ["error" + errorKeys[i]]: true })
-                    }
-                })
-                .catch(error => {
-                    console.log("sdfsd")
-                    console.log(error)
-                })
         }
     }
     return (
@@ -194,7 +230,7 @@ export default function SignUpComp() {
             {alertModal()}
             <CssBaseline />
             <div className={classes.paper}>
-                <Typography component="h1" variant="h5" style={{color: '#4F34A3'}}>
+                <Typography component="h1" variant="h5" style={{ color: '#4F34A3' }}>
                     Üye Ol
                 </Typography>
                 <form className={classes.form} noValidate>
@@ -231,8 +267,10 @@ export default function SignUpComp() {
                         <Grid item xs={12}>
                             <TextField
                                 value={values.email}
+                                onFocusCapture={() => emailApiCheck()}
                                 onChange={handleInputChange}
                                 error={values.erroremail}
+                                helperText={values.hasMail ? "Bu mail kullanılmaktadır." : ""}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -250,6 +288,7 @@ export default function SignUpComp() {
                                 variant="outlined"
                                 required
                                 fullWidth
+                                helperText="Şifre en az 7 haneli olmalıdır."
                                 name="password"
                                 label="Şifre"
                                 type="password"
@@ -296,12 +335,12 @@ export default function SignUpComp() {
                     <Button
                         onClick={singUp}
                         className={classes.submit}
-                        style={{backgroundColor: '#4F34A3'}}
+                        style={{ backgroundColor: '#4F34A3' }}
                         fullWidth
                         variant="contained"
                         color="primary"
-                      >
-                       Üye ol
+                    >
+                        Üye ol
                       </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
