@@ -215,7 +215,7 @@ export default function SignUpComp() {
                         let errorKeys = Object.keys(responseData.data.errors);
                         for (let i = 0; i < errorKeys.length; i++) {
                             //       console.log(responseData.data.errors[errorKeys[i]].message)
-                            setValues({ ...values, ["error" + errorKeys[i]]: true })
+                            setValues({ ...values, ["error" + [errorKeys[i]]]: true })
                         }
                     })
                     .catch(error => {
