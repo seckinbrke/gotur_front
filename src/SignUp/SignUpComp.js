@@ -224,10 +224,10 @@ export default function SignUpComp() {
                 await axios.post(REQUEST_URL, body)
                     .then(response => response)
                     .then(responseData => {
-                        let errorKeys = Object.keys(responseData.data.errors);
-                        for (let i = 0; i < errorKeys.length; i++) {
-                            //       console.log(responseData.data.errors[errorKeys[i]].message)
-                            setValues({ ...values, ["error" + [errorKeys[i]]]: true })
+                        //
+                        if(responseData.status === 200){
+                            console.log(responseData)
+                            history.push({ pathname: "/anasayfa"})
                         }
                     })
                     .catch(error => {

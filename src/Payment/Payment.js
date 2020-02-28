@@ -16,8 +16,8 @@ import Modal from '@material-ui/core/Modal';
 import axios from 'axios';
 import { history } from '../App';
 import AlertModal from '../components/AlertModal/AlertModal';
-
-
+import Cards from 'react-credit-cards';
+import 'react-credit-cards/es/styles-compiled.css';
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -114,67 +114,16 @@ export default function Payment() {
         const { name, value } = e.target
         setValues({ ...values, [name]: value })
     }
-    
-   
-    const handleClose = () => {
-         setValues({
-             ...values,
-             showAlert: false
-         })
-      };
 
-    // const singUp = async () => {
-    //     if (
-    //         values.email.trim().length === 0 ||
-    //         values.password.trim().length === 0 ||
-    //         values.namee.trim().length === 0 ||
-    //         values.surname.trim().length === 0 ||
-    //         values.phoneNumber.trim().length === 0
-    //     ) {
-    //         setValues({
-    //             ...values,
-    //             showAlert: true
-    //         })
-    //     } else {
-    //         let checkPass = checkPassword();
-    //         let checkPhone = checkPhoneNumber();
-    //         if (checkPass === false || checkPhone === false) {
-    //             alert('Bilgilerinizi kontrol ediniz.')
-    //             //Buraya güzel alert tasarla
-    //         } else {
-    //             let REQUEST_URL = 'http://localhost:3001/users/create';
-    //             let body = {
-    //                 name: values.namee,
-    //                 surname: values.surname,
-    //                 password: values.password,
-    //                 email: values.email,
-    //                 address: "asdfads",
-    //                 phoneNumber: 0 + values.phoneNumber,
-    //                 creditCardNo: null,
-    //                 creditCardDate: null,
-    //                 creditCardCvc: null,
-    //                 isAdmin:false
-    //             }
-    //             console.log(body)
-    //             await axios.post(REQUEST_URL, body)
-    //                 .then(response => response)
-    //                 .then(responseData => {
-    //                     let errorKeys = Object.keys(responseData.data.errors);
-    //                     for (let i = 0; i < errorKeys.length; i++) {
-    //                         //       console.log(responseData.data.errors[errorKeys[i]].message)
-    //                         setValues({ ...values, ["error" + [errorKeys[i]]]: true })
-    //                     }
-    //                 })
-    //                 .catch(error => {
-    //                     console.log("sdfsd")
-    //                     console.log(error)
-    //                 })
-    //         }
-    //     }
-    // }
+    const handleClose = () => {
+        setValues({
+            ...values,
+            showAlert: false
+        })
+    };
     return (
         <Container component="main" maxWidth="xs">
-            <AlertModal openAlert={values.showAlert} closePopUp={handleClose}/>
+            <AlertModal openAlert={values.showAlert} closePopUp={handleClose} />
             <CssBaseline />
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5" style={{ color: '#4F34A3' }}>
@@ -183,34 +132,45 @@ export default function Payment() {
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
+                            <div id="PaymentForm">
+                                <Cards
+                                    cvc={values.creditCardCvc}
+                                    expiry={values.creditCardDate}
+                                    //focus={values.focus}
+                                    name={values.fullName}
+                                    number={values.creditCardNo} />
+
+                            </div>
+                        </Grid>
+                        <Grid item xs={12}>
                             <TextField
-                                value={values.email}
+                                value={values.fullName}
                                 onChange={handleInputChange}
-                                error={values.erroremail}
+                                //error={values.erroremail}
                                 //helperText={values.hasMail ? "Bu mail kullanılmaktadır." : ""}
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="cardowner"
+                                id="fullName"
                                 label="Kart Sahibinin Adi"
-                                name="cardowner"
+                                name="fullName"
                                 autoComplete="cardowner"
                             />
                             {/* <FormHelperText className={classes.helperText} >{values.hasMail ? "Bu mail kullanılmaktadır." : ""}</FormHelperText> */}
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                error={values.errorpassword}
-                                value={values.password}
+                                //error={values.errorpassword}
+                                value={values.creditCardNo}
                                 onChange={handleInputChange}
                                 variant="outlined"
                                 required
                                 fullWidth
                                 //helperText="Şifre en az 7 haneli olmalıdır."
-                                name="creditcard"
+                                name="creditCardNo"
                                 label="Kredi Karti Numarasi"
                                 type="creditcard"
-                                id="creditcard"
+                                id="creditCardNo"
                                 autoComplete="creditcard"
                             />
                             {/* <FormHelperText className={classes.helperText}>{values.password.length < 7 ? "Şifre en az 7 haneli olmalıdır." : ""}</FormHelperText> */}
@@ -218,29 +178,29 @@ export default function Payment() {
                         <Grid item xs={6}>
                             <TextField
                                 error={false}
-                                value={values.passwordRepeat}
+                                value={values.creditCardDate}
                                 onChange={handleInputChange}
                                 variant="outlined"
                                 required
                                 fullWidth
-                                name="expiredate"
+                                name="creditCardDate"
                                 label="Son Kullanma Tarihi"
                                 type="expiredate"
-                                id="expiredate"
+                                id="creditCardDate"
                                 autoComplete="expiredate"
                             />
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
-                                value={values.phoneNumber}
+                                value={values.creditCardCvc}
                                 onChange={handleInputChange}
                                 error={false}
                                 autoComplete="fname"
-                                name="phoneNumber"
+                                name="creditCardCvc"
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="phoneNumber"
+                                id="creditCardCvc"
                                 label="CVC"
                             />
                         </Grid>
