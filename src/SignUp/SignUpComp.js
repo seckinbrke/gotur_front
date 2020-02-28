@@ -216,6 +216,7 @@ export default function SignUpComp() {
                 await axios.post(REQUEST_URL, body)
                     .then(response => response)
                     .then(responseData => {
+                        //
                         if(responseData.status === 200){
                             console.log(responseData)
                             history.push({ pathname: "/anasayfa"})
