@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 import SignIn from './SingIn/SignIn';
 import SignUp from './SignUp/SignUp';
 import Dashboard from './Dashboard/Dashboard';
+import Payment from './Payment/Payment';
 
 export const history = createHistory({ forceRefresh: true })
 
@@ -38,9 +39,10 @@ class Root extends React.Component {
                         <Switch>
                             <Route path="/" exact initial component={SignIn} />
                             <Route path="/uyeOl" exact component={SignUp} />
-                            <Route path="/mainMenu" exact component={MainPage} />
+                            <Route path="/anasayfa" exact component={MainPage} />
                             <Route path="/catagoryDetail" component={CatagoryDetail} />
                             <Route path="/dashboard" component={Dashboard}/>
+                            <Route path="/odeme" exact component={Payment} />
                         </Switch>
                         {/*this.basket()*/}
                     </div>
