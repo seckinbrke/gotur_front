@@ -6,19 +6,24 @@ import icon from '../../img/gotur.png'
 import { history } from '../../App';
 
 export default Headers = () => {
+    const [name, setName] = React.useState("");
+    React.useEffect(() => {
+        let userInformation = JSON.parse(localStorage.getItem('userInformation'));
+        setName(userInformation[0] === undefined ? "" : userInformation[0].USER.name)
+    })
     return (
         <Navbar collapseOnSelect expand="lg" className='navBar'>
             <Navbar.Brand href="#home">
-                <span onClick={()=> history.push({ pathname: "/"})} className="brandText" >götür</span>
+                <span onClick={() => history.push({ pathname: "/" })} className="brandText" >götür</span>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link >
-                        <span onClick={()=> history.push({ pathname: "/"})} className="pages">anasayfa</span>
+                        <span onClick={() => history.push({ pathname: "/anasayfa" })} className="pages">anasayfa</span>
                     </Nav.Link>
                     <Nav.Link >
-                        <span onClick={()=> history.push({ pathname: "/"})} className="pages">çıkış</span>
+                        <span onClick={() => history.push({ pathname: "/" })} className="pages">{name}</span>
                     </Nav.Link>
                 </Nav>
                 <Nav>

@@ -134,7 +134,7 @@ export default function SignUpComp() {
         }
     }
     const emailApiCheck = async () => {
-        let REQUEST_URL = 'http://localhost:3001/users/emailcheck';
+        let REQUEST_URL = 'http://goturapp.herokuapp.com/users/emailcheck';
         let body = {
             email: values.email
         }

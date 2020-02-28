@@ -169,7 +169,7 @@ export default function Payment() {
                                 //helperText="Şifre en az 7 haneli olmalıdır."
                                 name="creditCardNo"
                                 label="Kredi Karti Numarasi"
-                                type="creditcard"
+                                type="number"
                                 id="creditCardNo"
                                 autoComplete="creditcard"
                             />
@@ -213,7 +213,7 @@ export default function Payment() {
                         variant="contained"
                         color="primary"
                     >
-                        Ödemeyi Tamamla
+                        Kaydet
                       </Button>
                     <Grid container justify="flex-end">
                     </Grid>

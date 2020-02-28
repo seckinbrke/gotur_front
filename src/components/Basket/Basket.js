@@ -3,11 +3,14 @@ import './Basket.css'
 import { connect } from 'react-redux'
 import { actions as shoppingItemsActions } from '../../duck/reducers/Redux';
 import MinusIcon from '../../img/minusIcon.png'
+import { history } from '../../App';
 
 class Basket extends React.Component {
     state = {
         shoppingItemCount: this.props.shoppingItemCount,
-        showAlert: false
+        showAlert: false,
+        userInformation: {},
+
     }
 
     renderItems() {
@@ -15,8 +18,8 @@ class Basket extends React.Component {
         return this.props.shoppingItems.map((item, index) => {
             return (
                 <li key={index} className='CartItem'>
-                    <img alt="" style={{ width: 30, height: 30, flex: 0.1,borderRadius:10 }} src={item.productPhoto}></img>
-                    <p className='CartName' style={{ flex: 0.8,fontSize:13 }}>{item.name}</p>
+                    <img alt="" style={{ width: 30, height: 30, flex: 0.1, borderRadius: 10 }} src={item.productPhoto}></img>
+                    <p className='CartName' style={{ flex: 0.8, fontSize: 13 }}>{item.name}</p>
                     <p className='CartName' style={{ marginLeft: 10 }} style={{ flex: 0.1 }}>{item.price}₺</p>
                     <img onClick={() => this.deleteItem(item, index)} className="MinusIcon" style={{ flex: 0.1 }} src={MinusIcon} />
                 </li>
@@ -47,9 +50,9 @@ class Basket extends React.Component {
             return (
                 <div className='Alert'>
                     <div className='Alert_inner'>
-                    <h1 className='AlertName'>Siparişleriniz yola çıktı.</h1>
-                    <h5 className='AlertSubType'>Götür dedin götürüyoruz.</h5>
-                        <button className='AlertButton' onClick={() => {this.setState({ showAlert: !showAlert })}}>Götür bakalım</button>
+                        <h1 className='AlertName'>Siparişleriniz yola çıktı.</h1>
+                        <h5 className='AlertSubType'>Götür dedin götürüyoruz.</h5>
+                        <button className='AlertButton' onClick={() => { this.setState({ showAlert: !showAlert }) }}>Götür bakalım</button>
                     </div>
                 </div >
             );
@@ -59,15 +62,33 @@ class Basket extends React.Component {
         this.setState({
             showAlert: !this.state.showAlert
         });
-        this.props.setIsVisibleBasket(false);
-        localStorage.setItem('shoppingItems', JSON.stringify([]));
-        localStorage.setItem('shoppingItemCount', "0");
-        localStorage.setItem('totalPrice', "0");
-
-        this.props.setShoppingItem([])
-        this.props.setShoppingItemCount(0);
-        this.props.setTotalPrice(0);
-
+        let userInformation = JSON.parse(localStorage.getItem('userInformation'));
+        /*this.setState({
+            userInformation: userInformation[0]
+        })*/
+        /*  if (userInformation[0].USER.creditCardNo === null) {
+              history.push({ pathname: '/odeme' })
+          } else {
+  */
+        let orderObj = {
+            userName: userInformation[0].USER.name,
+            userSurname: userInformation[0].USER.surname,
+            userId: userInformation[0].USER._id,
+            userPhoneNumber: userInformation[0].USER.phoneNumber,
+            shoppingItems: this.props.shoppingItems
+        }
+        console.log(orderObj)
+        /*
+                
+                    this.props.setIsVisibleBasket(false);
+                    localStorage.setItem('shoppingItems', JSON.stringify([]));
+                    localStorage.setItem('shoppingItemCount', "0");
+                    localStorage.setItem('totalPrice', "0");
+                    this.props.setShoppingItem([])
+                    this.props.setShoppingItemCount(0);
+                    this.props.setTotalPrice(0);
+        
+                }*/
         // alert('Götür dediniz götürdük!');
     }
 
@@ -78,8 +99,8 @@ class Basket extends React.Component {
                     <div className="BasketTitle">Sepetim</div>
                     <ul className='ShoppingList'> {this.renderItems()}</ul>
                     <div className="TotalPriceDiv">
-                    <p className="TotalPriceText">Toplam: {this.props.totalPrice} ₺</p>
-                    <button onClick={() => this.orderCompleted()} className="CheckOut">Siparişi Tamamla</button>
+                        <p className="TotalPriceText">Toplam: {this.props.totalPrice} ₺</p>
+                        <button onClick={() => this.orderCompleted()} className="CheckOut">Siparişi Tamamla</button>
                     </div>
                 </div>
             )
