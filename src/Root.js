@@ -4,7 +4,6 @@ import MainPage from './MainPage/MainPage';
 import {
     BrowserRouter as Router,
     Switch,
-    withRouter,
     Route,
 } from "react-router-dom";
 import Headers from './components/NavBar/NavBar'
@@ -30,7 +29,6 @@ class Root extends React.Component {
         }
     }
     render() {
-        console.log(history)
         return (
             <Provider store={store}>
                 <Router history={history}>

@@ -5,7 +5,7 @@ import { Navbar, NavDropdown, Nav } from 'react-bootstrap';
 import icon from '../../img/gotur.png'
 import { history } from '../../App';
 
-export default Headers = () => {
+const Headers = () => {
     const [name, setName] = React.useState("");
     React.useEffect(() => {
         let userInformation = JSON.parse(localStorage.getItem('userInformation'));
@@ -35,5 +35,5 @@ export default Headers = () => {
             </Navbar.Collapse>
         </Navbar>
     )
-
 }
+export default Headers;

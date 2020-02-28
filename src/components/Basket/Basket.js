@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { actions as shoppingItemsActions } from '../../duck/reducers/Redux';
 import MinusIcon from '../../img/minusIcon.png'
 import { history } from '../../App';
+import axios from 'axios';
 
 class Basket extends React.Component {
     state = {
@@ -14,13 +15,12 @@ class Basket extends React.Component {
     }
 
     renderItems() {
-        console.log(this.props)
         return this.props.shoppingItems.map((item, index) => {
             return (
                 <li key={index} className='CartItem'>
                     <img alt="" style={{ width: 30, height: 30, flex: 0.1, borderRadius: 10 }} src={item.productPhoto}></img>
                     <p className='CartName' style={{ flex: 0.8, fontSize: 13 }}>{item.name}</p>
-                    <p className='CartName' style={{ marginLeft: 10 }} style={{ flex: 0.1 }}>{item.price}₺</p>
+                    <p className='CartName' style={{ flex: 0.1 }}>{item.price}₺</p>
                     <img onClick={() => this.deleteItem(item, index)} className="MinusIcon" style={{ flex: 0.1 }} src={MinusIcon} />
                 </li>
             )
@@ -58,38 +58,52 @@ class Basket extends React.Component {
             );
         }
     }
-    orderCompleted() {
-        this.setState({
-            showAlert: !this.state.showAlert
-        });
+    async orderCompleted() {
         let userInformation = JSON.parse(localStorage.getItem('userInformation'));
-        /*this.setState({
-            userInformation: userInformation[0]
-        })*/
-        /*  if (userInformation[0].USER.creditCardNo === null) {
-              history.push({ pathname: '/odeme' })
-          } else {
-  */
-        let orderObj = {
-            userName: userInformation[0].USER.name,
-            userSurname: userInformation[0].USER.surname,
-            userId: userInformation[0].USER._id,
-            userPhoneNumber: userInformation[0].USER.phoneNumber,
-            shoppingItems: this.props.shoppingItems
+        if (userInformation[0].USER.creditCardNo === null) {
+            history.push({ pathname: '/odeme' })
+        } else {
+            let REQUEST_URL = 'http://goturapp.herokuapp.com/order/add';
+            let orderObj = {
+                userName: userInformation[0].USER.name,
+                userSurname: userInformation[0].USER.surname,
+                userId: userInformation[0].USER._id,
+                userPhoneNumber: userInformation[0].USER.phoneNumber,
+                userAddress: userInformation[0].USER.address,
+                userCreditCardInfo: [{
+                    creditCardNo: userInformation[0].USER.creditCardNo,
+                    creditCardCvc: userInformation[0].USER.creditCardCvc,
+                    creditCardDate: userInformation[0].USER.creditCardDate,
+                    creditCardNameSurname: userInformation[0].USER.creditCardNameSurname,
+                }],
+                shoppingItems: this.props.shoppingItems
+            }
+            let body = {
+                orderObj: orderObj
+            }
+            await axios.post(REQUEST_URL, body)
+                .then(response => response)
+                .then(responseData => {
+                    if (responseData.status === 200) {
+                        console.log(responseData)
+                        this.props.setIsVisibleBasket(false);
+                        localStorage.setItem('shoppingItems', JSON.stringify([]));
+                        localStorage.setItem('shoppingItemCount', "0");
+                        localStorage.setItem('totalPrice', "0");
+                        this.props.setShoppingItem([])
+                        this.props.setShoppingItemCount(0);
+                        this.props.setTotalPrice(0);
+                        this.setState({
+                            showAlert: !this.state.showAlert
+                        });
+                    } else {
+                        console.log(responseData)
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                })
         }
-        console.log(orderObj)
-        /*
-                
-                    this.props.setIsVisibleBasket(false);
-                    localStorage.setItem('shoppingItems', JSON.stringify([]));
-                    localStorage.setItem('shoppingItemCount', "0");
-                    localStorage.setItem('totalPrice', "0");
-                    this.props.setShoppingItem([])
-                    this.props.setShoppingItemCount(0);
-                    this.props.setTotalPrice(0);
-        
-                }*/
-        // alert('Götür dediniz götürdük!');
     }
 
     renderShoppingCart = () => {
