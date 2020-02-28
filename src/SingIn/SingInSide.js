@@ -94,6 +94,7 @@ export default function SignInSide() {
         .then(response => response)
         .then(responseData => {
           if (responseData.status === 200) {
+            //
             console.log(responseData.data.user)
             console.log(responseData.data.user._id)
             Global.USER_ACCES_TOKEN = responseData.data.token;
