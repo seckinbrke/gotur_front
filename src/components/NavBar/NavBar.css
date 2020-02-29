@@ -9,6 +9,12 @@
     color: #FFD10D;
     font-family: Comfortaa;
   }
+  .userName{
+    font-size: 80%;
+    color: #FFD10D;
+    font-family: Comfortaa;
+    margin-left: 1300px;
+  }
 
   .icon{
    cursor: auto;
