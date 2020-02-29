@@ -157,7 +157,7 @@ export default function SignUpComp() {
                 alert('Bilgilerinizi kontrol ediniz.')
                 //Buraya güzel alert tasarla
             } else {
-                let REQUEST_URL = 'http://localhost:3001/users/create';
+                let REQUEST_URL = 'http://goturapp.herokuapp.com/users/create';
                 let body = {
                     name: values.namee,
                     surname: values.surname,
@@ -165,6 +165,7 @@ export default function SignUpComp() {
                     email: values.email,
                     address: values.email,
                     phoneNumber: 0 + values.phoneNumber,
+                    creditCardNameSurname:null,
                     creditCardNo: null,
                     creditCardDate: null,
                     creditCardCvc: null,

@@ -12,6 +12,8 @@ import Container from '@material-ui/core/Container';
 import AlertModal from '../components/AlertModal/AlertModal';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
+import axios from 'axios';
+import { history } from '../App';
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -81,8 +83,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function Payment() {
     const classes = useStyles();
+    const [userInfo, setUserInfo] = React.useState("");
+    React.useEffect(() => {
+        let userInformation = JSON.parse(localStorage.getItem('userInformation'));
+        setUserInfo(userInformation[0] === undefined ? {} : userInformation[0])
+        console.log(userInformation[0])
+    }, [])
     const [values, setValues] = React.useState({
-        fullName: "",
+        creditCardNameSurname: "",
         creditCardNo: "",
         creditCardDate: "",
         creditCardCvc: "",
@@ -91,6 +99,49 @@ export default function Payment() {
     const handleInputChange = e => {
         const { name, value } = e.target
         setValues({ ...values, [name]: value })
+    }
+
+    const updateCard = async () => {
+        if (
+            values.creditCardNameSurname.trim().length === 0 ||
+            values.creditCardNo.trim().length === 0 ||
+            values.creditCardDate.trim().length === 0 ||
+            values.creditCardCvc.trim().length === 0
+        ) {
+            setValues({
+                ...values,
+                showAlert: true
+            })
+        } else {
+            if (values.creditCardNameSurname.trim().length === 0 ||
+                values.creditCardNo.trim().length < 16 ||
+                values.creditCardDate.trim().length < 5 ||
+                values.creditCardCvc.trim().length < 3) {
+                alert('Bilgilerinizi kontrol ediniz.')
+                //Buraya güzel alert tasarla
+            } else {
+                let REQUEST_URL = 'http://localhost:3001/users/updateCardInfo/'+userInfo.USER_ID;
+                let body = {
+                    //_id: userInfo.USER_ID,
+                    creditCardNo: values.creditCardNo,
+                    creditCardDate: values.creditCardDate,
+                    creditCardCvc: values.creditCardCvc,
+                    creditCardNameSurname: values.creditCardNameSurname 
+                }
+                console.log(body)
+                await axios.patch(REQUEST_URL, body)
+                    .then(response => response)
+                    .then(responseData => {
+                        console.log(responseData)
+                        history.push({ pathname: "/anasayfa" })
+
+                    })
+                    .catch(error => {
+                        console.log("sdfsd")
+                        console.log(error)
+                    })
+            }
+        }
     }
 
     const handleClose = () => {
@@ -115,23 +166,23 @@ export default function Payment() {
                                     cvc={values.creditCardCvc}
                                     expiry={values.creditCardDate}
                                     //focus={values.focus}
-                                    name={values.fullName}
+                                    name={values.creditCardNameSurname}
                                     number={values.creditCardNo} />
 
                             </div>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                value={values.fullName}
+                                value={values.creditCardNameSurname}
                                 onChange={handleInputChange}
                                 //error={values.erroremail}
                                 //helperText={values.hasMail ? "Bu mail kullanılmaktadır." : ""}
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="fullName"
+                                id="creditCardNameSurname"
                                 label="Kart Sahibinin Adi"
-                                name="fullName"
+                                name="creditCardNameSurname"
                                 autoComplete="cardowner"
                             />
                             {/* <FormHelperText className={classes.helperText} >{values.hasMail ? "Bu mail kullanılmaktadır." : ""}</FormHelperText> */}
@@ -184,7 +235,7 @@ export default function Payment() {
                         </Grid>
                     </Grid>
                     <Button
-                        // onClick={singUp}
+                        onClick={updateCard}
                         className={classes.submit}
                         style={{ backgroundColor: '#4F34A3' }}
                         fullWidth
