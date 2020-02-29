@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { actions as shoppingItemsActions } from '../../duck/reducers/Redux';
 import './CatagoryDetail.css';
 import Basket from '../Basket/Basket';
+import { history } from '../../App';
 
 class CatagoryDetail extends React.Component {
     state = {
@@ -20,6 +21,7 @@ class CatagoryDetail extends React.Component {
         error: false,
         isVisible: true,
         showPopup: false,
+        showPopupLogin: false,
         selectedItem: {}
     }
     componentDidMount() {
@@ -27,7 +29,6 @@ class CatagoryDetail extends React.Component {
     }
     getItem = async () => {
         this.setState({ isVisible: true })
-        console.log(this.props.location.state.item)
         let body = { mainType: this.props.location.state.item.mainType }
         let REQUEST_URL = 'http://goturapp.herokuapp.com/enroll/getCategoryItems';
         await axios.post(REQUEST_URL, body)
@@ -65,7 +66,6 @@ class CatagoryDetail extends React.Component {
                 this.setState({ data: this.state.unfiltredItems })
         });
     }
-
     renderPopUp() {
         const { showPopup, selectedItem } = this.state;
         if (showPopup) {
@@ -83,27 +83,46 @@ class CatagoryDetail extends React.Component {
             );
         }
     }
+    renderGoLogin() {
+        const { showPopupLogin } = this.state;
+        if (showPopupLogin) {
+            return (
+                <div className='popup'>
+                    <div className='popup_inner'>
+                        <button className='ExitButton' onClick={() => this.setState({ showPopupLogin: !showPopupLogin })}>X</button>
+                        <h1 className='PopUpName'>Sepete ürün ekleyebilmeniz için üye girişi yapmanız gerekmektedir.</h1>
+                        <button className='PopUpButton' onClick={() => history.push({ pathname: '/' })}>Giriş Yap</button>
+                    </div>
+                </div >
+            );
+        }
+    }
     togglePopup() {
         this.setState({
             showPopup: !this.state.showPopup
         });
     }
     mergeItems = (item) => {
-        this.props.setTotalPrice(0);
-        let mergedItems = this.props.shoppingItems;
-        let mergedItemsStorage = JSON.parse(localStorage.getItem('shoppingItems'));
-        mergedItems.push(item)
-        mergedItemsStorage.push(item)
-        localStorage.setItem('shoppingItems', JSON.stringify(mergedItemsStorage));
-        this.props.setShoppingItem(mergedItems);
-        localStorage.setItem('shoppingItemCount', mergedItems.length);
-        this.props.setShoppingItemCount(mergedItems.length);
-        let total = 0;
-        mergedItems.map((item) => { return total += item.price })
-        console.log(total)
-        localStorage.setItem('totalPrice', total);
-        this.props.setTotalPrice(total);
-        //
+        let userInformation = JSON.parse(localStorage.getItem('userInformation'));
+        if (userInformation.length === 0) {
+            this.setState({ showPopupLogin: true })
+        }
+        else {
+            this.props.setTotalPrice(0);
+            let mergedItems = this.props.shoppingItems;
+            let mergedItemsStorage = JSON.parse(localStorage.getItem('shoppingItems'));
+            mergedItems.push(item)
+            mergedItemsStorage.push(item)
+            localStorage.setItem('shoppingItems', JSON.stringify(mergedItemsStorage));
+            this.props.setShoppingItem(mergedItems);
+            localStorage.setItem('shoppingItemCount', mergedItems.length);
+            this.props.setShoppingItemCount(mergedItems.length);
+            let total = 0;
+            mergedItems.map((item) => { return total += item.price })
+            console.log(total)
+            localStorage.setItem('totalPrice', total);
+            this.props.setTotalPrice(total);
+        }
     }
     renderItems = () => {
         if (this.state.isVisible) {
@@ -129,10 +148,10 @@ class CatagoryDetail extends React.Component {
         }
     }
     render() {
-        let nameTag = this.state.query.length === 0 ? <p className="categoryText">Kategoriler</p> : <p>"{this.state.query}" için bulunan ürünler...</p> //Arda bunu sekil yap
         return (
             <Auxx>
                 {this.renderPopUp()}
+                {this.renderGoLogin()}
                 <div className="MainPage">
                     <div className="wrap">
                         <div className="search">
@@ -158,7 +177,7 @@ class CatagoryDetail extends React.Component {
                     </div>
                 </div>
                 {this.renderItems()}
-                <Basket/>
+                <Basket />
             </Auxx>
         );
     }

@@ -15,11 +15,11 @@ export default function PaymentComponent() {
         const { name, value } = e.target
         setValues({ ...values, [name]: value })
     }
-    const handleInputFocus = (e) => {
+ /*   const handleInputFocus = (e) => {
         setValues({ 
             ...values,
             focus: e.target.name });
-      }
+      }*/
     return (
         <div id="PaymentForm">
             <Cards

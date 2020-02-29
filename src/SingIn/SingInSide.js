@@ -1,5 +1,4 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -16,7 +15,6 @@ import Modal from '@material-ui/core/Modal';
 import ErrorIcon from '@material-ui/icons/Error';
 import axios from 'axios';
 import { history } from '../App';
-import Global from '../Global';
 
 function Copyright() {
   return (
@@ -84,7 +82,7 @@ export default function SignInSide() {
         showAlert: true
       })
     } else {
-      let REQUEST_URL = 'http://localhost:3001/users/login';
+      let REQUEST_URL = 'http://goturapp.herokuapp.com/users/login';
       let body = {
         password: values.password,
         email: values.email,
@@ -94,13 +92,15 @@ export default function SignInSide() {
         .then(response => response)
         .then(responseData => {
           if (responseData.status === 200) {
-            //
-            console.log(responseData.data.user)
-            console.log(responseData.data.user._id)
-            Global.USER_ACCES_TOKEN = responseData.data.token;
-            Global.USER=responseData.data.user;
-            Global.USER_ID=responseData.data.user._id;
-            history.push({ pathname: "/anasayfa"})
+            let userInformation = [
+              {
+                USER_ACCESS_TOKEN: responseData.data.token,
+                USER: responseData.data.user,
+                USER_ID: responseData.data.user._id
+              }
+            ]
+            localStorage.setItem('userInformation', JSON.stringify(userInformation));
+            history.push({ pathname: "/anasayfa" })
           }
         })
         .catch(error => {

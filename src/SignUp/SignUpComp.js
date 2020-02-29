@@ -1,5 +1,4 @@
 import React from 'react';
-import ErrorIcon from '@material-ui/icons/Error';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -11,8 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import MaskedInput from 'react-text-mask';
-import Modal from '@material-ui/core/Modal';
 import axios from 'axios';
 import { history } from '../App';
 import AlertModal from '../components/AlertModal/AlertModal';
@@ -28,21 +25,6 @@ function Copyright() {
             {new Date().getFullYear()}
             {'.'}
         </Typography>
-    );
-}
-function TextMaskCustom(props) {
-    const { inputRef, ...other } = props;
-
-    return (
-        <MaskedInput
-            {...other}
-            ref={ref => {
-                inputRef(ref ? ref.inputElement : null);
-            }}
-            mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-            placeholderChar={'\u2000'}
-            showMask
-        />
     );
 }
 
@@ -102,7 +84,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUpComp() {
     const classes = useStyles();
-    const rootRef = React.useRef(null);
     const [values, setValues] = React.useState({
         phoneNumber: '5',
         namee: "",
@@ -134,7 +115,7 @@ export default function SignUpComp() {
         }
     }
     const emailApiCheck = async () => {
-        let REQUEST_URL = 'http://localhost:3001/users/emailcheck';
+        let REQUEST_URL = 'http://goturapp.herokuapp.com/users/emailcheck';
         let body = {
             email: values.email
         }
@@ -157,37 +138,6 @@ export default function SignUpComp() {
          })
       };
 
-    // const alertModal = () => {
-    //     return (
-    //         <Modal
-    //             disablePortal
-    //             disableEnforceFocus
-    //             disableAutoFocus
-    //             open={values.showAlert}
-    //             aria-labelledby="server-modal-title"
-    //             aria-describedby="server-modal-description"
-    //             className={classes.modal}
-    //             container={() => rootRef.current}
-    //         >
-    //             <div className={classes.paperModal}>
-    //                 <div className={classes.paper} style={{ marginTop: 0 }}>
-    //                     <ErrorIcon style={{ alignSelf: 'center', marginTop: 0, fontSize: 60, marginBottom: 20, color: '#5D3DBD' }} />
-    //                     <h2 id="server-modal-title" className={classes.paper} style={{ marginTop: 0 }}>Uyarı</h2>
-    //                     <p id="server-modal-description" className={classes.paper} style={{ marginTop: 0 }}>Tüm alanları doğru girdiğinizden emin olunuz.</p>
-    //                     <Button
-    //                         onClick={() => setValues({
-    //                             ...values,
-    //                             showAlert: false
-    //                         })}
-    //                         fullWidth
-    //                         variant="outlined"
-    //                         className={classes.alertButton}
-    //                     >Tamam</Button>
-    //                 </div>
-    //             </div>
-    //         </Modal>
-    //     )
-    // }
     const singUp = async () => {
         if (
             values.email.trim().length === 0 ||
@@ -213,7 +163,7 @@ export default function SignUpComp() {
                     surname: values.surname,
                     password: values.password,
                     email: values.email,
-                    address: "asdfads",
+                    address: values.email,
                     phoneNumber: 0 + values.phoneNumber,
                     creditCardNo: null,
                     creditCardDate: null,

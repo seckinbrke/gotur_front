@@ -1,5 +1,4 @@
 import React from 'react';
-import ErrorIcon from '@material-ui/icons/Error';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -10,11 +9,6 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import MaskedInput from 'react-text-mask';
-import Modal from '@material-ui/core/Modal';
-import axios from 'axios';
-import { history } from '../App';
 import AlertModal from '../components/AlertModal/AlertModal';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
@@ -28,21 +22,6 @@ function Copyright() {
             {new Date().getFullYear()}
             {'.'}
         </Typography>
-    );
-}
-function TextMaskCustom(props) {
-    const { inputRef, ...other } = props;
-
-    return (
-        <MaskedInput
-            {...other}
-            ref={ref => {
-                inputRef(ref ? ref.inputElement : null);
-            }}
-            mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-            placeholderChar={'\u2000'}
-            showMask
-        />
     );
 }
 
@@ -102,7 +81,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function Payment() {
     const classes = useStyles();
-    const rootRef = React.useRef(null);
     const [values, setValues] = React.useState({
         fullName: "",
         creditCardNo: "",
@@ -214,7 +192,7 @@ export default function Payment() {
                         variant="contained"
                         color="primary"
                     >
-                        Ödemeyi Tamamla
+                        Kaydet
                       </Button>
                     <Grid container justify="flex-end">
                     </Grid>

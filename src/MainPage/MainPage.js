@@ -10,6 +10,8 @@ import CategoryItem from '../components/Category/CategoryItem/CategoryItem';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { history } from '../App';
 import Basket from '../components/Basket/Basket';
+import { connect } from 'react-redux';
+import { actions as globalActions } from '../duck/reducers/Redux'
 
 
 
@@ -19,10 +21,15 @@ class MainPage extends React.Component {
         categoryData: [],
         error: false,
         query: "",
-        isVisible: true
+        isVisible: true,
+        userInformation: null
     }
     componentDidMount() {
         this.getCategory();
+        let userInformation = JSON.parse(localStorage.getItem('userInformation'));
+        this.setState({
+            userInformation:userInformation[0]
+        })
     }
 
     getCategory = async () => {
@@ -65,15 +72,21 @@ class MainPage extends React.Component {
     render() {
         let nameTag = this.state.query.length === 0 ? <p className="categoryText">Kategoriler</p> : <p>"{this.state.query}" için bulunan ürünler...</p> //Arda bunu sekil yap
         return (
-            
-                <Auxx>
-                    {this.renderItems()}
-                    <Basket/>
-                </Auxx>
+
+            <Auxx>
+                {this.renderItems()}
+                <Basket />
+            </Auxx>
 
 
         );
     }
 }
-export default MainPage;
+const mapStateToProps = ({ Redux: { global } }) => ({
+    global
+})
+const mapDispatchToProps = (dispatch) => ({
+    setGlobal: (global) => dispatch(globalActions.setGlobal(global)),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
 
