@@ -155,6 +155,7 @@ export default function Payment() {
                                 label="Kart Sahibinin Adi"
                                 name="fullName"
                                 autoComplete="cardowner"
+                                type="text"
                             />
                             {/* <FormHelperText className={classes.helperText} >{values.hasMail ? "Bu mail kullanılmaktadır." : ""}</FormHelperText> */}
                         </Grid>
@@ -169,7 +170,7 @@ export default function Payment() {
                                 //helperText="Şifre en az 7 haneli olmalıdır."
                                 name="creditCardNo"
                                 label="Kredi Karti Numarasi"
-                                type="creditcard"
+                                type="number"
                                 id="creditCardNo"
                                 autoComplete="creditcard"
                             />
@@ -185,7 +186,7 @@ export default function Payment() {
                                 fullWidth
                                 name="creditCardDate"
                                 label="Son Kullanma Tarihi"
-                                type="expiredate"
+                                // type="expiredate"
                                 id="creditCardDate"
                                 autoComplete="expiredate"
                             />
