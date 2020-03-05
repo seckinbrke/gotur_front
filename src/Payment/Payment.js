@@ -94,7 +94,8 @@ export default function Payment() {
         creditCardNo: "",
         creditCardDate: "",
         creditCardCvc: "",
-        showAlert: false
+        showAlert: false,
+        alertInfo: ""
     });
     const handleInputChange = e => { 
         const { name, value } = e.target
@@ -110,6 +111,7 @@ export default function Payment() {
         ) {
             setValues({
                 ...values,
+                alertInfo: "Tüm alanları doğru girdiğinizden emin olunuz.",
                 showAlert: true
             })
         } else {
@@ -130,7 +132,18 @@ export default function Payment() {
                 }
                 console.log(body)
                 await axios.put(REQUEST_URL, body)
-                    .then(response => console.log(response))
+                    .then(response => {
+                        console.log(response);
+                        setValues({
+                            ...values,
+                            alertInfo: "Bilgileriniz GoturPayment© guvencesi ile kayit edilmistir! Simdi ana sayfaya aktarilacaksiniz",
+                            showAlert: true
+                        })
+                        setTimeout(() => {
+                            history.push({ pathname: "/anasayfa"})
+                        }, 3000);
+                        
+                    })
                     
                     .catch(error => {
                         console.log("sdfsd")
@@ -148,7 +161,7 @@ export default function Payment() {
     };
     return (
         <Container component="main" maxWidth="xs">
-            <AlertModal openAlert={values.showAlert} closePopUp={handleClose} />
+            <AlertModal openAlert={values.showAlert} closePopUp={handleClose} alertInfo={values.alertInfo} />
             <CssBaseline />
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5" style={{ color: '#4F34A3' }}>

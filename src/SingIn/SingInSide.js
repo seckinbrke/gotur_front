@@ -37,7 +37,7 @@ export default function SignInSide() {
     password: "",
     email: "",
     showAlert: false,
-    alertInfo: "Tüm alanları doğru girdiğinizden emin olunuz."
+    alertInfo: ""
   });
   const handleInputChange = e => {
     const { name, value } = e.target
@@ -57,6 +57,7 @@ export default function SignInSide() {
     ) {
       setValues({
         ...values,
+        alertInfo: "Tüm alanları doğru girdiğinizden emin olunuz.",
         showAlert: true
       })
     } else {

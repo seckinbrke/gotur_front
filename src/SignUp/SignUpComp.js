@@ -95,7 +95,7 @@ export default function SignUpComp() {
         erroremail: false,
         errorpassword: false,
         showAlert: false,
-        alertInfo: "Tüm alanları doğru girdiğinizden emin olunuz."
+        alertInfo: ""
     });
     const handleInputChange = e => {
         const { name, value } = e.target
@@ -135,6 +135,7 @@ export default function SignUpComp() {
     const handleClose = () => {
          setValues({
              ...values,
+             alertInfo: "Tüm alanları doğru girdiğinizden emin olunuz.",
              showAlert: false
          })
       };
