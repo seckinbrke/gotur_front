@@ -96,7 +96,7 @@ export default function Payment() {
         creditCardCvc: "",
         showAlert: false
     });
-    const handleInputChange = e => {
+    const handleInputChange = e => { 
         const { name, value } = e.target
         setValues({ ...values, [name]: value })
     }
@@ -120,7 +120,7 @@ export default function Payment() {
                 alert('Bilgilerinizi kontrol ediniz.')
                 //Buraya güzel alert tasarla
             } else {
-                let REQUEST_URL = 'http://localhost:3001/users/updateCardInfo/'+userInfo.USER_ID;
+                let REQUEST_URL = 'http://localhost:3001/users/updateCardInfo/'+ userInfo.USER_ID;
                 let body = {
                     //_id: userInfo.USER_ID,
                     creditCardNo: values.creditCardNo,
@@ -129,13 +129,9 @@ export default function Payment() {
                     creditCardNameSurname: values.creditCardNameSurname 
                 }
                 console.log(body)
-                await axios.patch(REQUEST_URL, body)
-                    .then(response => response)
-                    .then(responseData => {
-                        console.log(responseData)
-                        history.push({ pathname: "/anasayfa" })
-
-                    })
+                await axios.put(REQUEST_URL, body)
+                    .then(response => console.log(response))
+                    
                     .catch(error => {
                         console.log("sdfsd")
                         console.log(error)

@@ -13,8 +13,18 @@ class Basket extends React.Component {
         userInformation: {},
 
     }
+    // componentDidMount() {
+    //     localStorage.setItem('shoppingItems', JSON.stringify([]));
+    //     localStorage.setItem('shoppingItemCount', "0");
+    //     localStorage.setItem('totalPrice', "0");
+    //     this.props.setShoppingItem([])
+    //     this.props.setShoppingItemCount(0);
+    //     this.props.setTotalPrice(0);
+    // }
+
 
     renderItems() {
+
         return this.props.shoppingItems.map((item, index) => {
             return (
                 <li key={index} className='CartItem'>

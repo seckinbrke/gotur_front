@@ -23,7 +23,7 @@ const Headers = () => {
                         <span onClick={() => history.push({ pathname: "/anasayfa" })} className="pages">anasayfa</span>
                     </Nav.Link>
                     <Nav.Link >
-                        <span  className="userName">{name}</span>
+                        <span  className="pages">{name}</span>
                     </Nav.Link>
                 </Nav>
                 <Nav>
