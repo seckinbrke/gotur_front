@@ -15,6 +15,7 @@ import Modal from '@material-ui/core/Modal';
 import ErrorIcon from '@material-ui/icons/Error';
 import axios from 'axios';
 import { history } from '../App';
+import AlertModal from '../components/AlertModal/AlertModal'
 
 function Copyright() {
   return (
@@ -36,42 +37,19 @@ export default function SignInSide() {
     password: "",
     email: "",
     showAlert: false,
+    alertInfo: "Tüm alanları doğru girdiğinizden emin olunuz."
   });
   const handleInputChange = e => {
     const { name, value } = e.target
     setValues({ ...values, [name]: value })
   }
-  const alertModal = () => {
-    return (
-      <Modal
-        disablePortal
-        disableEnforceFocus
-        disableAutoFocus
-        open={values.showAlert}
-        aria-labelledby="server-modal-title"
-        aria-describedby="server-modal-description"
-        className={classes.modal}
-        container={() => rootRef.current}
-      >
-        <div className={classes.paperModal}>
-          <div className={classes.paper} style={{ marginTop: 0 }}>
-            <ErrorIcon style={{ alignSelf: 'center', marginTop: 0, fontSize: 60, marginBottom: 20, color: '#5D3DBD' }} />
-            <h2 id="server-modal-title" className={classes.paper} style={{ marginTop: 0 }}>Uyarı</h2>
-            <p id="server-modal-description" className={classes.paper} style={{ marginTop: 0 }}>Tüm alanları doğru girdiğinizden emin olunuz.</p>
-            <Button
-              onClick={() => setValues({
-                ...values,
-                showAlert: false
-              })}
-              fullWidth
-              variant="outlined"
-              className={classes.alertButton}
-            >Tamam</Button>
-          </div>
-        </div>
-      </Modal>
-    )
-  }
+  const handleClose = () => {
+    setValues({
+        ...values,
+        showAlert: false
+    })
+ };
+
   const login = async () => {
     if (
       values.email.trim().length === 0 ||
@@ -115,7 +93,7 @@ export default function SignInSide() {
   // <LockOutlinedIcon />
   return (
     <Grid container component="main" className={classes.root}>
-      {alertModal()}
+      <AlertModal openAlert={values.showAlert} closePopUp={handleClose} alertInfo={values.alertInfo} />
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
