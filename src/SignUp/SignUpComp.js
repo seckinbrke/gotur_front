@@ -94,7 +94,8 @@ export default function SignUpComp() {
         hasMail: false,
         erroremail: false,
         errorpassword: false,
-        showAlert: false
+        showAlert: false,
+        alertInfo: "Tüm alanları doğru girdiğinizden emin olunuz."
     });
     const handleInputChange = e => {
         const { name, value } = e.target
@@ -191,7 +192,7 @@ export default function SignUpComp() {
     return (
         <Container component="main" maxWidth="xs">
             {/* {alertModal()} */}
-            <AlertModal openAlert={values.showAlert} closePopUp={handleClose}/>
+            <AlertModal openAlert={values.showAlert} closePopUp={handleClose} alertInfo={values.alertInfo} />
             <CssBaseline />
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5" style={{ color: '#4F34A3' }}>
