@@ -122,7 +122,7 @@ export default function Payment() {
                 alert('Bilgilerinizi kontrol ediniz.')
                 //Buraya güzel alert tasarla
             } else {
-                let REQUEST_URL = 'http://localhost:3001/users/updateCardInfo/'+ userInfo.USER_ID;
+                let REQUEST_URL = 'http://goturapp.herokuapp.com/users/updateCardInfo/'+ userInfo.USER_ID;
                 let body = {
                     //_id: userInfo.USER_ID,
                     creditCardNo: values.creditCardNo,
