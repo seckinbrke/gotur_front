@@ -17,17 +17,13 @@ import SignIn from './SingIn/SignIn';
 import SignUp from './SignUp/SignUp';
 import Dashboard from './Dashboard/Dashboard';
 import Payment from './Payment/Payment';
+import Products from './Dashboard/Products';
 
 export const history = createHistory({ forceRefresh: true })
 
 class Root extends React.Component {
-    basket = () => {
-        if (this.props.location.pathname !== "signIn") {
-            return (
-                <Basket />
-            )
-        }
-    }
+   //this.props.location.pathname !== "signIn" (Sayfa dizinini gösteren kod)
+    
     render() {
         return (
             <Provider store={store}>
@@ -40,9 +36,9 @@ class Root extends React.Component {
                             <Route path="/anasayfa" exact component={MainPage} />
                             <Route path="/catagoryDetail" component={CatagoryDetail} />
                             <Route path="/dashboard" component={Dashboard}/>
+                            <Route path="/urunler" component={Products}/>
                             <Route path="/odeme" exact component={Payment} />
                         </Switch>
-                        {/*this.basket()*/}
                     </div>
                 </Router >
             </Provider>
