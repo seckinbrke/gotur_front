@@ -119,7 +119,7 @@ class CatagoryDetail extends React.Component {
             this.props.setShoppingItemCount(mergedItems.length);
             let total = 0;
             mergedItems.map((item) => { return total += item.price })
-            console.log(total)
+            console.log(this.props.shoppingItems)
             localStorage.setItem('totalPrice', total);
             this.props.setTotalPrice(total);
         }

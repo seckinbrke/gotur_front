@@ -61,7 +61,8 @@ export default function OrdersModal(props) {
                 <div className={classes.paper} style={{ marginTop: 0 }}>
                     <ErrorIcon style={{ alignSelf: 'center', marginTop: 0, fontSize: 60, marginBottom: 20, color: '#5D3DBD' }} />
                     <h2 id="server-modal-title" className={classes.paper} style={{ marginTop: 0 }}>Siparişler</h2>
-                    {renderItems(props.selectedItem)}
+                    <ul className='ShoppingList'> {renderItems(props.selectedItem)}</ul>
+                    
                     <Button
                         onClick={props.closePopUp}
                         fullWidth
