@@ -35,7 +35,6 @@ export default function OrdersModal(props) {
     const classes = useStyles();
     const rootRef = React.useRef(null);
     const renderItems = (seletedItem) => {
-        console.log(seletedItem)
         return seletedItem.map((item, index) => {
             return (
                 <li key={index} className='CartItem'>

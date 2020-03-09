@@ -1,5 +1,5 @@
 import React from 'react';
-import SignInSide from './SingInSide';
+import SignInSide from './SignInSide'
 class SignIn extends React.Component {
     componentDidMount() {
         localStorage.setItem('userInformation', JSON.stringify([]));

@@ -169,11 +169,11 @@ class CatagoryDetail extends React.Component {
 
                     </div>
                     <div className="Catagories">
+                       {/* <h5>text</h5>
                         <h5>text</h5>
                         <h5>text</h5>
                         <h5>text</h5>
-                        <h5>text</h5>
-                        <h5>text</h5>
+                       <h5>text</h5>*/}
                     </div>
                 </div>
                 {this.renderItems()}

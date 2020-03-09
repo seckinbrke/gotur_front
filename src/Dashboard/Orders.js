@@ -36,7 +36,7 @@ export default function Orders() {
 
   const totalPrice = (shoppingItems) => {
     let total = 0;
-    shoppingItems.map(item => {
+    shoppingItems.map((item) => {
       total += item.price
     })
     return total;
@@ -61,7 +61,8 @@ export default function Orders() {
     if (responseData !== null || responseData !== undefined) {
       console.log(responseData)
       responseData.map((item, index) => {
-        deneme.push(createData(index, item.createdAt, item.userName + " " + item.userSurname,
+        let date = new Date(item.createdAt)
+        deneme.push(createData(index,date.toLocaleString(), item.userName + " " + item.userSurname,
           item.userAddress, splitCreditCardNo(item.userCreditCardInfo[0].creditCardNo), totalPrice(item.shoppingItems), seeMore(item.shoppingItems)))
       });
     }
@@ -74,16 +75,16 @@ export default function Orders() {
   return (
     <React.Fragment>
       <OrdersModal openAlert={popUp} closePopUp={() => setPopUp(false)} selectedItem={selectedItem} />
-      <Title style={{ color: '#4F34A3' }} >Recent Orders</Title>
+      <Title style={{ color: '#4F34A3' }} >Siparişler</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-            <TableCell align="right">Orders</TableCell>
+            <TableCell>Tarih</TableCell>
+            <TableCell>Müşteri Adı</TableCell>
+            <TableCell>Adres</TableCell>
+            <TableCell>Kredi Kartı No</TableCell>
+            <TableCell align="right">Sepet Tutarı</TableCell>
+            <TableCell align="right">Sepet</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -101,7 +102,7 @@ export default function Orders() {
       </Table>
       <div className={classes.seeMore}>
         <Link style={{ color: '#4F34A3' }} href="#" onClick={preventDefault}>
-          See more orders
+          Daha Fazla Gör
         </Link>
       </div>
     </React.Fragment>

@@ -95,7 +95,8 @@ export default function SignUpComp() {
         erroremail: false,
         errorpassword: false,
         showAlert: false,
-        alertInfo: ""
+        alertInfo: "",
+        address: ""
     });
     const handleInputChange = e => {
         const { name, value } = e.target
@@ -133,12 +134,12 @@ export default function SignUpComp() {
             })
     }
     const handleClose = () => {
-         setValues({
-             ...values,
-             alertInfo: "Tüm alanları doğru girdiğinizden emin olunuz.",
-             showAlert: false
-         })
-      };
+        setValues({
+            ...values,
+            alertInfo: "Tüm alanları doğru girdiğinizden emin olunuz.",
+            showAlert: false
+        })
+    };
 
     const singUp = async () => {
         if (
@@ -146,7 +147,8 @@ export default function SignUpComp() {
             values.password.trim().length === 0 ||
             values.namee.trim().length === 0 ||
             values.surname.trim().length === 0 ||
-            values.phoneNumber.trim().length === 0
+            values.phoneNumber.trim().length === 0||
+            values.address.trim().length === 0
         ) {
             setValues({
                 ...values,
@@ -165,22 +167,22 @@ export default function SignUpComp() {
                     surname: values.surname,
                     password: values.password,
                     email: values.email,
-                    address: values.email,
+                    address: values.address,
                     phoneNumber: 0 + values.phoneNumber,
-                    creditCardNameSurname:null,
+                    creditCardNameSurname: null,
                     creditCardNo: null,
                     creditCardDate: null,
                     creditCardCvc: null,
-                    isAdmin:false
+                    isAdmin: false
                 }
                 console.log(body)
                 await axios.post(REQUEST_URL, body)
                     .then(response => response)
                     .then(responseData => {
                         //
-                        if(responseData.status === 200){
+                        if (responseData.status === 200) {
                             console.log(responseData)
-                            history.push({ pathname: "/anasayfa"})
+                            history.push({ pathname: "/" })
                         }
                     })
                     .catch(error => {
@@ -291,6 +293,21 @@ export default function SignUpComp() {
                                 fullWidth
                                 id="phoneNumber"
                                 label="Telefon Numarası"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                value={values.address}
+                                onChange={handleInputChange}
+                                error={false}
+                                multiline
+                                autoComplete="fname"
+                                name="address"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="address"
+                                label="Adres"
                             />
                         </Grid>
                     </Grid>
