@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './ProductCard.css'
 import { getCategoryProducts } from '../Api/CatagoryAPI';
+import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -35,14 +36,14 @@ export default function ProductCategory(props) {
   }, [])
 
   const getCategoryProduct = async () => {
-    let body ={
-      mainType:props.item.mainType
+    let body = {
+      mainType: props.item.mainType
     }
-    let responseData = await getCategoryProducts({body:body});
+    let responseData = await getCategoryProducts({ body: body });
     if (responseData !== null || responseData !== undefined) {
       setProducts(responseData)
       console.log(responseData);
-      
+
     }
   };
 
@@ -59,7 +60,6 @@ export default function ProductCategory(props) {
           <div style={{ flex: 0.1 }}>
             <h3 className="Price">{item.price} ₺</h3>
           </div>
-  
         </CardContent>
         <CardActions>
           <Button size="small">Learn More</Button>
@@ -68,15 +68,17 @@ export default function ProductCategory(props) {
     );
   }
 
-  const renderItems = ()=>{
-    return products.map((item,index)=>{
-      return <ProductCard item={item} key={index}/>
+  const renderItems = () => {
+    return products.map((item, index) => {
+      return ProductCard(item, index)
     })
   }
   return (
-    <div>
-      <h3>{props.item.mainType}</h3>
-      {renderItems()}
+    <div style={{ display: "flex" }}>
+      <div>
+        <h3>{props.item.mainType}</h3>
+        {renderItems()}
+      </div>
     </div>
   );
 }

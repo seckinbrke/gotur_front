@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -122,15 +122,19 @@ export default function Products() {
         setOpen(!open);
     };
     const renderCategories = () => {
-        if(isVisible===true){
+        if (isVisible === true) {
             return (<div>
-                      <h3>asdkjaskdjas</h3>
+                <h3>asdkjaskdjas</h3>
             </div>)
-        }else{
+        } else {
             return categories.map((item, index) => {
-                return (<ProductCategory item = {item} key={index} />)
+                return (
+
+                    <ProductCategory item={item} key={index} />
+
+                )
             })
-        }   
+        }
     }
 
     return (
@@ -155,7 +159,7 @@ export default function Products() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Container maxWidth="lg" className={classes.container}>
+                <Container maxWidth="lg" className={classes.container} style={{ flexDirection: 'row', flex: 1 }}>
                     {renderCategories()}
                 </Container>
             </main>
@@ -164,19 +168,19 @@ export default function Products() {
 }
 
 /*
- <Grid container spacing={3}>
-            {/* Chart
+<Grid container spacing={3}>
+        {/* Chart
 
-            {/* Recent Deposits
+{/* Recent Deposits
 
-            {/* Recent Orders
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
+{/* Recent Orders
+<Grid item xs={12}>
+<Paper className={classes.paper}>
+<Orders />
+</Paper>
+</Grid>
+</Grid>
+<Box pt={4}>
+<Copyright />
+</Box>
 */
