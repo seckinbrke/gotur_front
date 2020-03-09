@@ -1,0 +1,59 @@
+.Post {
+    width: 12%;
+    height: 130px;
+    text-align: center;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 2px 3px #ccc;
+    margin: 1.37%;
+    cursor: pointer;
+    float: left;
+    flex-direction: column;
+    display: flex;
+}
+@media screen and (max-width: 420px) {
+    .Post {
+      width: 47.2%;
+    }
+  }
+
+.Post:hover,
+.Post:active {
+    background-color: #FFFFFF;
+}
+
+.Author {
+    color: #5D3DBD;
+}
+
+.Images {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+.Title{
+    color: #5D3DBD;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 5px;
+    text-align: center;
+}
+.Price {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 5px;
+    text-align: center;
+}
+.PlusIconDiv{
+    display: flex;
+    justify-content: flex-end;
+    margin:5px;
+    right: 0;
+}
+.PlusIcon{
+    width: 30px;
+    height: 30px;
+    
+}
+

@@ -30,6 +30,8 @@ class CatagoryDetail extends React.Component {
     getItem = async () => {
         this.setState({ isVisible: true })
         let body = { mainType: this.props.location.state.item.mainType }
+        console.log(body);
+        
         let REQUEST_URL = 'http://goturapp.herokuapp.com/enroll/getCategoryItems';
         await axios.post(REQUEST_URL, body)
             .then(response => response)

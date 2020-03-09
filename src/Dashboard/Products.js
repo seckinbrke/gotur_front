@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { mainListItems, secondaryListItems } from './listItems';
 import ProductCard from './ProductCard';
 import '../components/Category/CategoryItem/CategoryItem.css'
+import { getCategories } from '../Api/CatagoryAPI';
+import ProductCategory from './ProductCard';
 
 function Copyright() {
     return (
@@ -97,13 +99,39 @@ const useStyles = makeStyles(theme => ({
 
 export default function Products() {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [categories, setCategories] = useState([]);
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+        getCategory();
+    }, [])
+
+    const getCategory = async () => {
+        let responseData = await getCategories();
+        if (responseData !== null || responseData !== undefined) {
+            setCategories(responseData)
+            setIsVisible(false)
+            console.log(responseData);
+        }
+    };
     const handleDrawerOpen = () => {
         setOpen(true);
     };
     const handleDrawerClose = () => {
         setOpen(!open);
     };
+    const renderCategories = () => {
+        if(isVisible===true){
+            return (<div>
+                      <h3>asdkjaskdjas</h3>
+            </div>)
+        }else{
+            return categories.map((item, index) => {
+                return (<ProductCategory item = {item} key={index} />)
+            })
+        }   
+    }
 
     return (
         <div className={classes.root}>
@@ -128,18 +156,7 @@ export default function Products() {
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
-                    <article className="PostCatagory">
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                    </article>
+                    {renderCategories()}
                 </Container>
             </main>
         </div >
