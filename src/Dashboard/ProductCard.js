@@ -74,7 +74,7 @@ export default function ProductCategory(props) {
     })
   }
   return (
-    <div>
+    <div >
       <h3>{props.item.mainType}</h3>
       {renderItems()}
     </div>

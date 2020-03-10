@@ -155,7 +155,7 @@ export default function Products() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Container maxWidth="lg" className={classes.container}>
+                <Container style={{flexDirection: "column"}} maxWidth="lg" className={classes.container}>
                     {renderCategories()}
                 </Container>
             </main>
