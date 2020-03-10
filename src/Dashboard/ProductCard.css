@@ -1,5 +1,5 @@
-.Post {
-    width: 12%;
+.CardPost {
+    width: 130px;
     height: 130px;
     text-align: center;
     background-color: #FFFFFF;
@@ -18,40 +18,40 @@
     }
   }
 
-.Post:hover,
-.Post:active {
+.CardPost:hover,
+.CardPost:active {
     background-color: #FFFFFF;
 }
 
-.Author {
+.CardAuthor {
     color: #5D3DBD;
 }
 
-.Images {
+.CardImages {
     width: 50px;
     height: 50px;
     border-radius: 5px;
 }
-.Title{
+.CardTitle{
     color: #5D3DBD;
     font-size: 12px;
     font-weight: bold;
     margin: 5px;
     text-align: center;
 }
-.Price {
+.CardPrice {
     font-size: 12px;
     font-weight: bold;
     margin: 5px;
     text-align: center;
 }
-.PlusIconDiv{
+.CardPlusIconDiv{
     display: flex;
     justify-content: flex-end;
     margin:5px;
     right: 0;
 }
-.PlusIcon{
+.CardPlusIcon{
     width: 30px;
     height: 30px;
     

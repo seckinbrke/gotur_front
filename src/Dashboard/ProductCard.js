@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './ProductCard.css'
 import { getCategoryProducts } from '../Api/CatagoryAPI';
+import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -35,48 +36,46 @@ export default function ProductCategory(props) {
   }, [])
 
   const getCategoryProduct = async () => {
-    let body ={
-      mainType:props.item.mainType
+    let body = {
+      mainType: props.item.mainType
     }
-    let responseData = await getCategoryProducts({body:body});
+    let responseData = await getCategoryProducts({ body: body });
     if (responseData !== null || responseData !== undefined) {
       setProducts(responseData)
       console.log(responseData);
-      
+
     }
   };
 
   const ProductCard = (item) => {
     return (
-      <Card className="Post">
+      <Card className="CardPost">
         <CardContent>
           <div style={{ flex: 0.3 }}>
-            <h3 className="Title">{item.name}</h3>
+            <h3 className="CardTitle">{item.name}</h3>
           </div>
-          <div className="Info" style={{ flex: 0.6 }}>
-            <img className="Images" src={item.productPhoto} alt="" />
+          <div className="CardInfo" style={{ flex: 0.6 }}>
+            <img className="CardImages" src={item.productPhoto} alt="" />
           </div>
           <div style={{ flex: 0.1 }}>
-            <h3 className="Price">{item.price} ₺</h3>
+            <h3 className="CardPrice">{item.price} ₺</h3>
           </div>
-  
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     );
   }
 
-  const renderItems = ()=>{
-    return products.map((item,index)=>{
-      return <ProductCard item={item} key={index}/>
+  const renderItems = () => {
+    return products.map((item, index) => {
+      return ProductCard(item, index)
     })
   }
   return (
-    <div >
-      <h3>{props.item.mainType}</h3>
-      {renderItems()}
+    <div style={{ display: "flex" }}>
+      <div>
+        <h3>{props.item.mainType}</h3>
+        {renderItems()}
+      </div>
     </div>
   );
 }

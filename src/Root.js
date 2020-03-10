@@ -18,6 +18,7 @@ import SignUp from './SignUp/SignUp';
 import Dashboard from './Dashboard/Dashboard';
 import Payment from './Payment/Payment';
 import Products from './Dashboard/Products';
+import AddProduct from './Dashboard/AddProduct';
 
 export const history = createHistory({ forceRefresh: true })
 
@@ -38,6 +39,8 @@ class Root extends React.Component {
                             <Route path="/dashboard" component={Dashboard}/>
                             <Route path="/urunler" component={Products}/>
                             <Route path="/odeme" exact component={Payment} />
+                            <Route path="/urunekle" exact component={AddProduct} />
+
                         </Switch>
                     </div>
                 </Router >
