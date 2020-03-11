@@ -23,3 +23,26 @@ export const getCategoryProducts = ({body=null}) => {
             })
     });
 };
+export const getSubTypes = ({body=null}) => {
+    return new Promise((resolve, reject) => {
+        let REQUEST_URL = "http://goturapp.herokuapp.com/enroll/getSubTypes";
+        axios.post(REQUEST_URL,body)
+            .then((response) => {
+                resolve(response.data)
+            }).catch((err) => {
+                reject(null);
+            })
+    });
+};
+export const addProduct = ({body=null}) => {
+    return new Promise((resolve, reject) => {
+        let REQUEST_URL = "http://goturapp.herokuapp.com/product/add";
+        axios.post(REQUEST_URL,body)
+            .then((response) => {
+                resolve(response.data)
+            }).catch((err) => {
+                reject(null);
+            })
+    });
+};
+

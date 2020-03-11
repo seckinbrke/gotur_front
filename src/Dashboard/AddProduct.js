@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 //import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { history } from '../App';
@@ -17,11 +17,19 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputBase from '@material-ui/core/InputBase';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 import clsx from 'clsx';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { mainListItems, secondaryListItems } from './listItems';
+import { getCategories, getSubTypes, addProduct } from '../Api/CatagoryAPI';
+
 //import Chart from './Chart';
 
 
@@ -39,6 +47,42 @@ function Copyright() {
 	);
 }
 const drawerWidth = 240;
+
+const BootstrapInput = withStyles(theme => ({
+	root: {
+		'label + &': {
+			marginTop: theme.spacing(3),
+		},
+	},
+	input: {
+		borderRadius: 4,
+		position: 'relative',
+		backgroundColor: theme.palette.background.paper,
+		border: '1px solid #ced4da',
+		fontSize: 16,
+		padding: '10px 26px 10px 12px',
+		transition: theme.transitions.create(['border-color', 'box-shadow']),
+		// Use the system font instead of the default Roboto font.
+		fontFamily: [
+			'-apple-system',
+			'BlinkMacSystemFont',
+			'"Segoe UI"',
+			'Roboto',
+			'"Helvetica Neue"',
+			'Arial',
+			'sans-serif',
+			'"Apple Color Emoji"',
+			'"Segoe UI Emoji"',
+			'"Segoe UI Symbol"',
+		].join(','),
+		'&:focus': {
+			borderRadius: 4,
+			borderColor: '#80bdff',
+			boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+		},
+	},
+}))(InputBase);
+
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -102,20 +146,28 @@ const useStyles = makeStyles(theme => ({
 	fixedHeight: {
 		height: 240,
 	},
+	margin: {
+		margin: theme.spacing(1),
+	},
 }));
 
 
 export default function AddProduct() {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(false);
-	const handleDrawerOpen = () => {
-		setOpen(true);
-	};
+	const [categoryData, setCategoryData] = React.useState([]);
+	const [subData, setSubData] = React.useState([]);
+	const [mainType, setMainType] = React.useState("");
+	const [subType, setSubType] = React.useState("");
+	React.useEffect(() => {
+		getCategory();
+		getSubCategory()
+	}, [mainType])
 	const handleDrawerClose = () => {
 		setOpen(!open);
 	};
 	const [values, setValues] = React.useState({
-		productPhoto: '',
+		productPhoto: "",
 		namee: "",
 		price: "",
 		showAlert: false,
@@ -125,6 +177,16 @@ export default function AddProduct() {
 		const { name, value } = e.target
 		setValues({ ...values, [name]: value })
 	}
+	const handleCategoryChange = e => {
+		const mainTypes = e.target.value
+		console.log(e.target.value);
+		setMainType(mainTypes)
+	}
+	const handleSubChange = e => {
+		const subTypes = e.target.value
+		console.log(e.target.value);
+		setSubType(subTypes)
+	}
 	const handleClose = () => {
 		setValues({
 			...values,
@@ -132,58 +194,70 @@ export default function AddProduct() {
 			showAlert: false
 		})
 	};
+	const getCategory = async () => {
+		let responseData = await getCategories();
+		if (responseData !== null || responseData !== undefined) {
+			setCategoryData(responseData)
+			console.log(responseData);
+		}
+	};
+	const getSubCategory = async () => {
+		let body = { mainType: mainType }
+		console.log(body);
 
-	// const singUp = async () => {
-	//     if (
-	//         values.email.trim().length === 0 ||
-	//         values.password.trim().length === 0 ||
-	//         values.namee.trim().length === 0 ||
-	//         values.surname.trim().length === 0 ||
-	//         values.phoneNumber.trim().length === 0 ||
-	//         values.address.trim().length === 0
-	//     ) {
-	//         setValues({
-	//             ...values,
-	//             showAlert: true
-	//         })
-	//     } else {
-	//         let checkPass = checkPassword();
-	//         let checkPhone = checkPhoneNumber();
-	//         if (checkPass === false || checkPhone === false) {
-	//             alert('Bilgilerinizi kontrol ediniz.')
-	//             //Buraya güzel alert tasarla
-	//         } else {
-	//             let REQUEST_URL = 'http://goturapp.herokuapp.com/users/create';
-	//             let body = {
-	//                 name: values.namee,
-	//                 surname: values.surname,
-	//                 password: values.password,
-	//                 email: values.email,
-	//                 address: values.address,
-	//                 phoneNumber: 0 + values.phoneNumber,
-	//                 creditCardNameSurname: null,
-	//                 creditCardNo: null,
-	//                 creditCardDate: null,
-	//                 creditCardCvc: null,
-	//                 isAdmin: false
-	//             }
-	//             console.log(body)
-	//             await axios.post(REQUEST_URL, body)
-	//                 .then(response => response)
-	//                 .then(responseData => {
-	//                     //
-	//                     if (responseData.status === 200) {
-	//                         console.log(responseData)
-	//                         history.push({ pathname: "/" })
-	//                     }
-	//                 })
-	//                 .catch(error => {
-	//                     console.log("sdfsd")
-	//                     console.log(error)
-	//                 })
-	//         }
-	//     }
-	// }
+		let responseData = await getSubTypes({ body: body });
+		if (responseData !== null || responseData !== undefined) {
+			setSubData(responseData)
+			console.log(responseData);
+		}
+	};
+	const renderCategory = () => {
+		return categoryData.map(data => {
+			return <option value={data.mainType}>{data.mainType}</option>
+		})
+	}
+	const renderSubCategory = () => {
+		return subData.map(data => {
+			return <option value={data}>{data}</option>
+		})
+	}
+
+	const AddProducts = async () => {
+		let body = {
+			name: values.namee,
+			productPhoto: values.productPhoto,
+			price: values.price,
+			mainType: mainType,
+			subType: subType,
+		}
+		console.log(body);
+		
+	    if (
+	        values.productPhoto.trim().length === 0 ||
+	        values.price.trim().length === 0 ||
+	        values.namee.trim().length === 0 ||
+	        mainType.trim().length === 0 ||
+	        subType.trim().length === 0
+	    ) {
+	        setValues({
+				...values,
+				alertInfo: "Girdiginiz bilgilerin dogrulugundan emin olunuz.",
+	            showAlert: true
+	        })
+	    } else {
+	            let body = {
+	                name: values.namee,
+	                productPhoto: values.productPhoto,
+	                price: values.price,
+	                mainType: mainType,
+	                subType: subType,
+				}
+				let responseData = await addProduct({body: body});
+				if (responseData !== null || responseData !== undefined) {
+					console.log(responseData);
+				}        
+	    }
+	}
 	return (
 		<div className={classes.root}>
 			<CssBaseline />
@@ -250,34 +324,58 @@ export default function AddProduct() {
 										value={values.productPhoto}
 										onChange={handleInputChange}
 										error={values.erroremail}
-										//helperText={values.hasMail ? "Bu mail kullanılmaktadır." : ""}
+										helperText={values.hasMail ? "Bu mail kullanılmaktadır." : ""}
 										variant="outlined"
 										required
 										fullWidth
 										id="productPhoto"
-										label="urun fotograf url"
+										label="Ürün Fotoğraf Url"
 										name="productPhoto"
 										autoComplete="url"
 									/>
 								</Grid>
+								<InputLabel style={{ marginLeft: "8px" }} htmlFor="demo-customized-select-native">Kategoriler</InputLabel>
+								<FormControl className={classes.margin}>
+									<Grid item xs={12}>
+										<NativeSelect style={{ width: "396px" }}
+											id="demo-customized-select-native"
+											value={mainType}
+											onChange={handleCategoryChange}
+											input={<BootstrapInput />}
+										>
+											<option value="" />
+											{renderCategory()}
+
+										</NativeSelect>
+									</Grid>
+								</FormControl>
+								<InputLabel style={{ marginLeft: "8px" }} htmlFor="demo-customized-select-native">Alt Kategoriler</InputLabel>
+								<FormControl className={classes.margin}>
+									<Grid item xs={12}>
+										<NativeSelect style={{ width: "396px" }}
+											id="demo-customized-select-native"
+											value={subType}
+											onChange={handleSubChange}
+											input={<BootstrapInput />}
+										>
+											<option value=""/>
+											{renderSubCategory()}
+										</NativeSelect>
+									</Grid>
+								</FormControl>
+
 							</Grid>
 							<Button
-								// onClick={singUp}
+								onClick={AddProducts}
 								className={classes.submit}
-								style={{ backgroundColor: '#4F34A3' }}
+								style={{ backgroundColor: '#4F34A3', marginTop: "20px" }}
 								fullWidth
 								variant="contained"
 								color="primary"
 							>
-								Üye ol
+								Ürün Ekle
   						</Button>
-							<Grid container justify="flex-end">
-								<Grid item>
-									<Link href="#" variant="body2">
-										Giriş Yap
-        					</Link>
-								</Grid>
-							</Grid>
+
 						</form>
 					</div>
 					<Box mt={5}>
