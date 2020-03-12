@@ -17,7 +17,8 @@ import '../components/Category/CategoryItem/CategoryItem.css'
 import { getCategories } from '../Api/CatagoryAPI';
 import ProductCategory from './ProductCard';
 import Spinner from '../components/Spinner/Spinner';
-
+import { borders } from '@material-ui/system';
+import { Box } from '@material-ui/core';
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -85,6 +86,8 @@ const useStyles = makeStyles(theme => ({
     container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
+        borderWidth: 1,
+        borderColor: 'black'
     },
     paper: {
         padding: theme.spacing(2),
@@ -132,7 +135,7 @@ export default function Products(props) {
         } else {
             return categories.map((item, index) => {
                 return (
-                    <ProductCategory item={item} key={index}/>
+                    <ProductCategory item={item} key={index} />
                 )
             })
         }
@@ -160,9 +163,11 @@ export default function Products(props) {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
+
                 <Container maxWidth="lg" className={classes.container} style={{ flexDirection: 'row', flex: 1 }}>
                     {renderCategories()}
                 </Container>
+
             </main>
         </div >
     );

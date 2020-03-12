@@ -46,3 +46,15 @@ export const addProduct = ({body=null}) => {
     });
 };
 
+export const deleteProduct = ({body=null}) => {
+    return new Promise((resolve, reject) => {
+        let REQUEST_URL = "http://goturapp.herokuapp.com/product/remove/" + body._id;
+        axios.delete(REQUEST_URL,body)
+            .then((response) => {
+                resolve(response.data)
+            }).catch((err) => {
+                reject(null);
+            })
+    });
+};
+
