@@ -1,35 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import './ProductCard.css'
 import { getCategoryProducts, deleteProduct } from '../Api/CatagoryAPI';
-import { Divider, Box } from '@material-ui/core';
-
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
-
-
+import { Box } from '@material-ui/core';
 
 export default function ProductCategory(props) {
-  const classes = useStyles();
   const [products, setProducts] = React.useState([]);
   useEffect(() => {
     getCategoryProduct();
@@ -84,7 +61,7 @@ export default function ProductCategory(props) {
     <Box border={1} borderRadius={10} marginTop={5} borderColor={'#5D3DBD'} >
       <div style={{ display: "flex", flexDirection: 'column', borderWidth: 10, borderColor: 'black' }}>
         <div>
-          <h3 style={{marginLeft:10}}>{props.item.mainType}</h3>
+          <h3 style={{ marginLeft: 10 }}>{props.item.mainType}</h3>
           {renderItems()}
         </div>
       </div>

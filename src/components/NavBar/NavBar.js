@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBar.css';
-import { Navbar, NavDropdown, Nav } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import icon from '../../img/gotur.png'
 import { history } from '../../App';
 
@@ -59,7 +60,7 @@ const Headers = () => {
                         <span className="pages">admin</span>
                     </Nav.Link>
                     <Nav.Link >
-                        <span className="pages">{name}</span>
+                        <span className="pages">{name.toLowerCase()}</span>
                     </Nav.Link>
                     <Nav.Link >
                         <span className="pages">çıkış</span>
