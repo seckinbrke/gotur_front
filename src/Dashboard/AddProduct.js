@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { history } from '../App';
 import AlertModal from '../components/AlertModal/AlertModal';
+import SuccessModal from '../components/AlertModal/SuccessModal'
 
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -171,7 +172,10 @@ export default function AddProduct() {
 		namee: "",
 		price: "",
 		showAlert: false,
+		showSuccess: false,
 		alertInfo: "",
+		successInfo: "",
+		emptyValue: ""
 	});
 	const handleInputChange = e => {
 		const { name, value } = e.target
@@ -192,6 +196,13 @@ export default function AddProduct() {
 			...values,
 			alertInfo: "Tüm alanları doğru girdiğinizden emin olunuz.",
 			showAlert: false
+		})
+	};
+	const handleCloseSuccess = () => {
+		setValues({
+			...values,
+			successInfo: "Ürünü Başarıyla Eklediniz",
+			showSuccess: false
 		})
 	};
 	const getCategory = async () => {
@@ -231,35 +242,46 @@ export default function AddProduct() {
 			subType: subType,
 		}
 		console.log(body);
-		
-	    if (
-	        values.productPhoto.trim().length === 0 ||
-	        values.price.trim().length === 0 ||
-	        values.namee.trim().length === 0 ||
-	        mainType.trim().length === 0 ||
-	        subType.trim().length === 0
-	    ) {
-	        setValues({
+
+		if (
+			values.productPhoto.trim().length === 0 ||
+			values.price.trim().length === 0 ||
+			values.namee.trim().length === 0 ||
+			mainType.trim().length === 0 ||
+			subType.trim().length === 0
+		) {
+			setValues({
 				...values,
 				alertInfo: "Girdiginiz bilgilerin dogrulugundan emin olunuz.",
-	            showAlert: true
-	        })
-	    } else {
-	            let body = {
-	                name: values.namee,
-	                productPhoto: values.productPhoto,
-	                price: values.price,
-	                mainType: mainType,
-	                subType: subType,
-				}
-				let responseData = await addProduct({body: body});
-				if (responseData !== null || responseData !== undefined) {
-					console.log(responseData);
-				}        
-	    }
+				showAlert: true
+			})
+		} else {
+			let body = {
+				name: values.namee,
+				productPhoto: values.productPhoto,
+				price: values.price,
+				mainType: mainType,
+				subType: subType,
+			}
+			let responseData = await addProduct({ body: body });
+			if (responseData !== null || responseData !== undefined) {
+				setValues({
+					...values,
+					successInfo: "Ürünü Başarıyla Eklediniz",
+					showSuccess: true,
+					emptyValue: "",
+					productPhoto: "",
+					namee: "",
+					price: "",
+				})
+
+			}
+		}
 	}
 	return (
 		<div className={classes.root}>
+			{/* <AlertModal openAlert={values.showAlert} closePopUp={handleClose} alertInfo={values.alertInfo} /> */}
+			{/* <SuccessModal openSuccess={values.showAlert} closePopUpSuccess={handleClose} successInfo={values.successInfo}/> */}
 			<CssBaseline />
 			<Drawer
 				variant="permanent"
@@ -282,11 +304,11 @@ export default function AddProduct() {
 				<div className={classes.appBarSpacer} />
 				<Container component="main" maxWidth="xs">
 					<AlertModal openAlert={values.showAlert} closePopUp={handleClose} alertInfo={values.alertInfo} />
-					{/* <CssBaseline /> */}
+					<SuccessModal openSuccess={values.showSuccess} closePopUpSuccess={handleCloseSuccess} successInfo={values.successInfo} />
 					<div className={classes.paper1}>
 						<Typography component="h1" variant="h5" style={{ color: '#4F34A3' }}>
 							Ürün Ekle
-</Typography>
+						</Typography>
 						<form className={classes.form} noValidate>
 							<Grid container spacing={2}>
 								<Grid item xs={12}>
@@ -343,7 +365,7 @@ export default function AddProduct() {
 											onChange={handleCategoryChange}
 											input={<BootstrapInput />}
 										>
-											<option value="" />
+											<option value={values.emptyValue} />
 											{renderCategory()}
 
 										</NativeSelect>
@@ -358,7 +380,7 @@ export default function AddProduct() {
 											onChange={handleSubChange}
 											input={<BootstrapInput />}
 										>
-											<option value=""/>
+											<option value={values.emptyValue} />
 											{renderSubCategory()}
 										</NativeSelect>
 									</Grid>
@@ -374,7 +396,7 @@ export default function AddProduct() {
 								color="primary"
 							>
 								Ürün Ekle
-  						</Button>
+  						    </Button>
 
 						</form>
 					</div>
