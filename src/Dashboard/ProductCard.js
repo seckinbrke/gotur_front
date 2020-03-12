@@ -41,9 +41,7 @@ export default function ProductCategory(props) {
     }
     let responseData = await getCategoryProducts({ body: body });
     if (responseData !== null || responseData !== undefined) {
-      setProducts(responseData)
-      console.log(responseData);
-
+      setProducts(responseData);
     }
   };
 

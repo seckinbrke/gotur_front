@@ -16,6 +16,7 @@ import ProductCard from './ProductCard';
 import '../components/Category/CategoryItem/CategoryItem.css'
 import { getCategories } from '../Api/CatagoryAPI';
 import ProductCategory from './ProductCard';
+import Spinner from '../components/Spinner/Spinner';
 
 function Copyright() {
     return (
@@ -97,7 +98,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function Products() {
+export default function Products(props) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -111,27 +112,27 @@ export default function Products() {
         let responseData = await getCategories();
         if (responseData !== null || responseData !== undefined) {
             setCategories(responseData)
-            setIsVisible(false)
+            setTimeout(() => {
+                setIsVisible(false)
+            }, 1500);
             console.log(responseData);
         }
     };
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
+
     const handleDrawerClose = () => {
         setOpen(!open);
     };
     const renderCategories = () => {
         if (isVisible === true) {
-            return (<div>
-                <h3>asdkjaskdjas</h3>
-            </div>)
+            return (
+                <div>
+                    <Spinner />
+                </div>
+            )
         } else {
             return categories.map((item, index) => {
                 return (
-
-                    <ProductCategory item={item} key={index} />
-
+                    <ProductCategory item={item} key={index}/>
                 )
             })
         }
