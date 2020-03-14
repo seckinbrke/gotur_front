@@ -52,6 +52,7 @@ export default function ProductCategory(props) {
       <Card className="CardPost">
         <CardContent>
           <div style={{ flex: 0.3 }}>
+            <button style={{flex: 0.1}}>X</button>
             <h3 className="CardTitle">{item.name}</h3>
           </div>
           <div className="CardInfo" style={{ flex: 0.6 }}>

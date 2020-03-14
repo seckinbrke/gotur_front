@@ -223,13 +223,13 @@ export default function AddProduct() {
 		}
 	};
 	const renderCategory = () => {
-		return categoryData.map(data => {
-			return <option value={data.mainType}>{data.mainType}</option>
+		return categoryData.map((data, index) => {
+			return <option key={index} value={data.mainType}>{data.mainType}</option>
 		})
 	}
 	const renderSubCategory = () => {
-		return subData.map(data => {
-			return <option value={data}>{data}</option>
+		return subData.map((data, index) => {
+			return <option key={index} value={data}>{data}</option>
 		})
 	}
 
