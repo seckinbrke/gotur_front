@@ -60,9 +60,6 @@ const Headers = () => {
                         <span className="pages">admin</span>
                     </Nav.Link>
                     <Nav.Link >
-                        <span className="pages">{name.toLowerCase()}</span>
-                    </Nav.Link>
-                    <Nav.Link >
                         <span className="pages">çıkış</span>
                     </Nav.Link>
                 </Nav>
