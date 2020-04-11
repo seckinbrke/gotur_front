@@ -1,9 +1,5 @@
 import React from 'react';
 import './Post.css';
-import plusIcon from '../../img/plusIcon.png';
-{/* <div onClick={() => props.onClickPlus()}  className="PlusIconDiv">
-<img style={{ width: 30, height: 30 }} className='PlusIcon' src={plusIcon} alt =""/>
-</div> */}
 const Post = (props) => (
     <div onClick={() => props.onClick()} className="Post" style={{ flex: 1 }}>
        

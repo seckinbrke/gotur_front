@@ -1,23 +1,21 @@
+/* eslint-disable no-lone-blocks */
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { mainListItems, secondaryListItems } from './listItems';
-import ProductCard from './ProductCard';
 import '../components/Category/CategoryItem/CategoryItem.css'
 import { getCategories } from '../Api/CatagoryAPI';
 import ProductCategory from './ProductCard';
-
-function Copyright() {
+import Spinner from '../components/Spinner/Spinner';
+{/*function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
@@ -28,7 +26,7 @@ function Copyright() {
             {'.'}
         </Typography>
     );
-}
+}*/}
 
 const drawerWidth = 240;
 
@@ -84,6 +82,8 @@ const useStyles = makeStyles(theme => ({
     container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
+        borderWidth: 1,
+        borderColor: 'black'
     },
     paper: {
         padding: theme.spacing(2),
@@ -97,7 +97,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function Products() {
+export default function Products(props) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -111,27 +111,27 @@ export default function Products() {
         let responseData = await getCategories();
         if (responseData !== null || responseData !== undefined) {
             setCategories(responseData)
-            setIsVisible(false)
+            setTimeout(() => {
+                setIsVisible(false)
+            }, 1500);
             console.log(responseData);
         }
     };
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
+
     const handleDrawerClose = () => {
         setOpen(!open);
     };
     const renderCategories = () => {
         if (isVisible === true) {
-            return (<div>
-                <h3>asdkjaskdjas</h3>
-            </div>)
+            return (
+                <div>
+                    <Spinner />
+                </div>
+            )
         } else {
             return categories.map((item, index) => {
                 return (
-
                     <ProductCategory item={item} key={index} />
-
                 )
             })
         }
@@ -159,9 +159,11 @@ export default function Products() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
+
                 <Container maxWidth="lg" className={classes.container} style={{ flexDirection: 'row', flex: 1 }}>
                     {renderCategories()}
                 </Container>
+
             </main>
         </div >
     );

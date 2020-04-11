@@ -8,11 +8,8 @@ import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import ErrorIcon from '@material-ui/icons/Error';
 import axios from 'axios';
 import { history } from '../App';
 import AlertModal from '../components/AlertModal/AlertModal'
@@ -32,7 +29,6 @@ function Copyright() {
 
 export default function SignInSide() {
   const classes = useStyles();
-  const rootRef = React.useRef(null);
   const [values, setValues] = React.useState({
     password: "",
     email: "",

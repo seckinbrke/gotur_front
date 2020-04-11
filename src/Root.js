@@ -9,7 +9,6 @@ import {
 import Headers from './components/NavBar/NavBar'
 import CatagoryDetail from './components/Category/CatagoryDetail';
 import createHistory from 'history/createBrowserHistory';
-import Basket from './components/Basket/Basket';
 import { Provider } from 'react-redux'
 import store from "./duck/index";
 import { connect } from 'react-redux';

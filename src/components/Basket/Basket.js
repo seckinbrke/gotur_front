@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
 import './Basket.css'
 import { connect } from 'react-redux'
@@ -73,7 +74,7 @@ class Basket extends React.Component {
         if (userInformation[0].USER.creditCardNo === null) {
             history.push({ pathname: '/odeme' })
         } else {
-            let REQUEST_URL = 'http://localhost:3001/order/add';
+            let REQUEST_URL = 'http://goturapp.herokuapp.com/order/add';
             let orderObj = {
                 userName: userInformation[0].USER.name,
                 userSurname: userInformation[0].USER.surname,
