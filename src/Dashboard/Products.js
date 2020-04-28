@@ -15,7 +15,6 @@ import '../components/Category/CategoryItem/CategoryItem.css'
 import { getCategories } from '../Api/CatagoryAPI';
 import ProductCategory from './ProductCard';
 import Spinner from '../components/Spinner/Spinner';
-import { yellow } from '@material-ui/core/colors';
 {/*function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">

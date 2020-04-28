@@ -27,6 +27,7 @@ class MainPage extends React.Component {
         this.setState({
             userInformation:userInformation[0]
         })
+        if(userInformation[0].USER.isAdmin === true) history.push({pathname: "/dashboard"})
     }
 
     getCategory = async () => {
