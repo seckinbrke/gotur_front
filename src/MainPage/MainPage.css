@@ -102,5 +102,11 @@ body{
   }
   .MainPage{
     height: 0px;
+    
+  }
+}
+@media screen and (min-width: 992px){
+  .MainPage{
+    background-position-y: -80px;
   }
 }

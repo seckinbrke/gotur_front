@@ -8,12 +8,19 @@ import { history } from '../../App';
 
 const Headers = () => {
     const [name, setName] = useState("");
-    //const [userInfo, setUserInfo] = useState([]);
+    
+    // const [userInfo, setUserInfo] = useState([]);
     useEffect(() => {
         let userInformation = JSON.parse(localStorage.getItem('userInformation'));
-      // setUserInfo(userInformation)
+    //   setUserInfo(userInformation)
         setName(userInformation[0] === undefined ? "" : userInformation[0].USER.name + ' ' + userInformation[0].USER.surname)
+        console.log(userInformation);
+        
     })
+    const logOut = () => {
+        localStorage.setItem('userInformation',[])
+        history.push({pathname: "/"})
+    }
 /*
     const checkLogin = () => {
         if (userInfo.length !== 0) {
@@ -57,13 +64,7 @@ const Headers = () => {
                         <span onClick={() => history.push({ pathname: "/anasayfa" })} className="pages">anasayfa</span>
                     </Nav.Link>
                     <Nav.Link >
-                        <span className="pages">admin</span>
-                    </Nav.Link>
-                    <Nav.Link >
-                        <span className="pages">{name.toLowerCase()}</span>
-                    </Nav.Link>
-                    <Nav.Link >
-                        <span className="pages">çıkış</span>
+                        <span onClick={logOut} className="pages">çıkış</span>
                     </Nav.Link>
                 </Nav>
                 <Nav>

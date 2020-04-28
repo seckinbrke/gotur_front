@@ -37,7 +37,7 @@ export default function ProductCategory(props) {
     return (
       <Card className="CardPost">
         <div style={{ flex: 0.1 }}>
-          <DeleteIcon onClick={() => removeProduct(item._id, index)} fontSize="small" style={{ color: "#e6bb00", alignSelf: 'flex-end', marginLeft: 100 }} />
+          <DeleteIcon onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) removeProduct(item._id, index)}} fontSize="small" style={{ color: "#e6bb00", alignSelf: 'flex-end', marginLeft: 100 }} />
         </div>
         <div style={{ flex: 0.3 }}>
           <h3 className="CardTitle">{item.name}</h3>
@@ -58,7 +58,7 @@ export default function ProductCategory(props) {
     })
   }
   return (
-    <Box border={1} borderRadius={10} marginTop={5} borderColor={'#5D3DBD'} >
+    <Box border={10} borderRadius={10} marginTop={5} borderColor={'#5D3DBD'} >
       <div style={{ display: "flex", flexDirection: 'column', borderWidth: 10, borderColor: 'black' }}>
         <div>
           <h3 style={{ marginLeft: 10 }}>{props.item.mainType}</h3>

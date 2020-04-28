@@ -78,12 +78,12 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         height: '100vh',
         overflow: 'auto',
+        
     },
     container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
         borderWidth: 1,
-        borderColor: 'black'
     },
     paper: {
         padding: theme.spacing(2),
@@ -157,10 +157,10 @@ export default function Products(props) {
                 <Divider />
                 <List>{secondaryListItems}</List>
             </Drawer>
-            <main className={classes.content}>
+            <main className={classes.content} style={{color:'black', textAlign:'center'} }>
                 <div className={classes.appBarSpacer} />
 
-                <Container maxWidth="lg" className={classes.container} style={{ flexDirection: 'row', flex: 1 }}>
+                <Container maxWidth="lg" className={classes.container} style={{ flexDirection: 'row', flex: 1} }>
                     {renderCategories()}
                 </Container>
 

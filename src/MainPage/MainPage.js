@@ -23,8 +23,17 @@ class MainPage extends React.Component {
         this.getCategory();
         let userInformation = JSON.parse(localStorage.getItem('userInformation'));
         this.setState({
-            userInformation:userInformation[0]
+            userInformation: userInformation[0]
         })
+
+        // if (userInformation === []) {
+        //     return
+        // }
+        // else {
+        //     if (userInformation[0].USER.isAdmin === true) {
+        //         history.push({ pathname: "/dashboard" })
+        //     }
+        // }
     }
 
     getCategory = async () => {
@@ -65,10 +74,10 @@ class MainPage extends React.Component {
     }
     render() {
         return (
-            <Auxx>
+            <div >
                 {this.renderItems()}
                 <Basket />
-            </Auxx>
+            </div>
         );
     }
 }
