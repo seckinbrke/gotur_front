@@ -10,8 +10,6 @@ import Basket from '../components/Basket/Basket';
 import { connect } from 'react-redux';
 import { actions as globalActions } from '../duck/reducers/Redux'
 
-
-
 class MainPage extends React.Component {
     state = {
         data: [],
@@ -50,7 +48,6 @@ class MainPage extends React.Component {
         history.push({ pathname: "/catagoryDetail", search: "?query=" + item.mainType, state: { item: item } })
     }
     renderItems = () => {
-
         if (this.state.isVisible) {
             return (
                 <Spinner />
