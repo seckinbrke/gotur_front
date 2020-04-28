@@ -41,10 +41,10 @@ export default function SignInSide() {
   }
   const handleClose = () => {
     setValues({
-        ...values,
-        showAlert: false
+      ...values,
+      showAlert: false
     })
- };
+  };
 
   const login = async () => {
     if (
@@ -75,7 +75,12 @@ export default function SignInSide() {
               }
             ]
             localStorage.setItem('userInformation', JSON.stringify(userInformation));
-            history.push({ pathname: "/anasayfa" })
+            if (userInformation[0].USER.isAdmin === true) {
+              history.push({ pathname: "/dashboard" })
+            }
+            else
+              history.push({ pathname: "/anasayfa" })
+
           }
         })
         .catch(error => {
