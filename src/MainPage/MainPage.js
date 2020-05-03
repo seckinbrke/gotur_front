@@ -1,6 +1,5 @@
 import React from 'react';
 import './MainPage.css';
-import Auxx from '../hoc/Auxx';
 import axios from 'axios';
 import Spinner from '../components/Spinner/Spinner';
 import CategoryItem from '../components/Category/CategoryItem/CategoryItem';
@@ -27,15 +26,6 @@ class MainPage extends React.Component {
         this.setState({
             userInformation: userInformation[0]
         })
-
-        // if (userInformation === []) {
-        //     return
-        // }
-        // else {
-        //     if (userInformation[0].USER.isAdmin === true) {
-        //         history.push({ pathname: "/dashboard" })
-        //     }
-        // }
     }
 
     getCategory = async () => {
