@@ -11,3 +11,8 @@
 4)To display project, run `npm start`
 
 #### PS: Some of the computers have issue with localStorage. For best experience pls comment out `componentDidMount()` and start the project with `npm start` code and then again comment `componentDidMount()` function.
+
+![GitHub Logo](/images/g1.png)
+![GitHub Logo](/images/g2.png)
+![GitHub Logo](/images/g3.png)
+![GitHub Logo](/images/g4.png)
