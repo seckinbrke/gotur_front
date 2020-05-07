@@ -14,14 +14,20 @@ class Basket extends React.Component {
         userInformation: {},
 
     }
-    // componentDidMount() {
-    //     localStorage.setItem('shoppingItems', JSON.stringify([]));
-    //     localStorage.setItem('shoppingItemCount', "0");
-    //     localStorage.setItem('totalPrice', "0");
-    //     this.props.setShoppingItem([])
-    //     this.props.setShoppingItemCount(0);
-    //     this.props.setTotalPrice(0);
-    // }
+     componentDidMount() {
+        //let shoppingItemCount = await JSON.parse(localStorage.getItem('shoppingItemCount'));
+        //var localStorage = window.localStorage;
+       //console.log(localStorage)
+        //console.log(shoppingItemCount)
+        if(!localStorage.getItem('shoppingItemCount')){
+            localStorage.setItem('shoppingItems', JSON.stringify([]));
+            localStorage.setItem('shoppingItemCount', "0");
+            localStorage.setItem('totalPrice', "0");
+            this.props.setShoppingItem([])
+            this.props.setShoppingItemCount(0);
+            this.props.setTotalPrice(0);
+        }
+    }
 
 
     renderItems() {
