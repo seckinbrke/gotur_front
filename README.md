@@ -4,13 +4,13 @@
 -  https://nodejs.org/en/ LTS version recommended
 ![GitHub Logo](/images/1.png)
 ### 2)Clone this project
-- git clone https://github.com/seckinbrke/gotur_front.git
+- `git clone https://github.com/seckinbrke/gotur_front.git`
 ![GitHub Logo](/images/2.png)
 ### 3)Change your directory
 ![GitHub Logo](/images/3.png)
-### 3)Open the project( VS Code recomended), then go to terminal and run `npm install`.(You should only use this command after successfuly installed project or when developers add new libraries.
+### 4)Open the project( VS Code recomended), then go to terminal and run `npm install`.(You should only use this command after successfuly installed project or when developers add new libraries.
 ![GitHub Logo](/images/4.png)
-### 4)To display project, run `npm start`
+### 5)To display project, run `npm start`
 ![GitHub Logo](/images/5.png)
 
 
