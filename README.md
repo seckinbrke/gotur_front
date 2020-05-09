@@ -13,6 +13,7 @@
 ### 5)To display project, run `npm start`
 ![GitHub Logo](/images/5.png)
 
+# Screenshots
 
 ![GitHub Logo](/images/g1.png)
 ![GitHub Logo](/images/g2.png)
@@ -21,3 +22,7 @@
 ![GitHub Logo](/images/g5.png)
 ![GitHub Logo](/images/g6.png)
 ![GitHub Logo](/images/g7.png)
+
+# Developers Note!!!!
+
+### Please do not mess up Gotur's data. Our team devoted their time to add over hundreds of data. Please be respectful! 
